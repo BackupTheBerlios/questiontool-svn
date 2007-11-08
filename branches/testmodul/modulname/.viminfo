@@ -32,11 +32,26 @@
 	C
 
 # File marks:
-'0  1  0  /tmp/cvseBNbp1
-'1  5  264  /net/pork-da/home/groups/questiontool/htdocs/index.html
-'2  81  0  /net/pork-da/home/groups/questiontool/htdocs/index.php
+'0  1  15  /tmp/cvsh4HgfB
+'1  1  0  /tmp/cvseBNbp1
+'2  5  264  /net/pork-da/home/groups/questiontool/htdocs/index.html
+'3  81  0  /net/pork-da/home/groups/questiontool/htdocs/index.php
 
 # Jumplist (newest first):
+-'  1  15  /tmp/cvsh4HgfB
+-'  1  0  /tmp/cvseBNbp1
+-'  5  264  /net/pork-da/home/groups/questiontool/htdocs/index.html
+-'  1  0  /net/pork-da/home/groups/questiontool/htdocs/index.html
+-'  81  0  /net/pork-da/home/groups/questiontool/htdocs/index.php
+-'  1  0  /net/pork-da/home/groups/questiontool/htdocs/index.php
+-'  81  0  /net/pork-da/home/groups/questiontool/htdocs/index.php
+-'  1  0  /net/pork-da/home/groups/questiontool/htdocs/index.php
+-'  5  264  /net/pork-da/home/groups/questiontool/htdocs/index.html
+-'  1  0  /net/pork-da/home/groups/questiontool/htdocs/index.html
+-'  81  0  /net/pork-da/home/groups/questiontool/htdocs/index.php
+-'  1  0  /net/pork-da/home/groups/questiontool/htdocs/index.php
+-'  81  0  /net/pork-da/home/groups/questiontool/htdocs/index.php
+-'  1  0  /net/pork-da/home/groups/questiontool/htdocs/index.php
 -'  1  0  /tmp/cvseBNbp1
 -'  5  264  /net/pork-da/home/groups/questiontool/htdocs/index.html
 -'  1  0  /net/pork-da/home/groups/questiontool/htdocs/index.html
@@ -52,6 +67,12 @@
 -'  1  0  /net/pork-da/home/groups/questiontool/htdocs/index.php
 
 # History of marks within files (newest to oldest):
+
+> /tmp/cvsh4HgfB
+	"	1	15
+	^	1	16
+	.	1	15
+	+	1	15
 
 > /tmp/cvseBNbp1
 	"	1	0
