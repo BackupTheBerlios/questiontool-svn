@@ -7,15 +7,16 @@ import java.util.Date;
 /**
  * Klasse erstellt eine Simple Textdatei mit bestimmten Anfangstext
  * und kann in diese schreiben
+ * Praktisch für eine Log-File
  * 
  * Nicht vergessen sonst steht nichts in der Datei
  * BufferedWriter.close(); // Call close() when finished writing, otherwise data may not be written to disk.
- * @author Sparky
+ * @author Bennersdorfe Dminik
  *
  */
 public class reporter {
 
-	final File f = new File("D:\\Schule\\3 Semester\\PR\\Log File\\PR.log");
+	final File f = new File("\\PR.log");
 	private BufferedWriter fileout;
 	private Date datum = new Date();
 
