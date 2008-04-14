@@ -8,6 +8,7 @@ public class Frage {
 	
 	public Frage (String frage)
 	{
+		antworten = new ArrayList<String>();
 		this.frage = frage;
 	}
 
