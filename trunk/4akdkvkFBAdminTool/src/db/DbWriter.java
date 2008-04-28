@@ -3,8 +3,10 @@ package db;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import fragen.Frage;
+import fragen.Fragebogen;
 
 public class DbWriter
 {
@@ -53,8 +55,8 @@ public class DbWriter
 		}
 	}
 	
-	
-	public static boolean speichereFragebogen(Frage f)
+	//2 in Fragen und danach in haben
+	public static boolean speichereFrage(Frage f, int fbId)
 	{
 		/*
 		 * ABLAUF
@@ -65,6 +67,22 @@ public class DbWriter
 		 * speichern in Tabelle: haben(alle Fragen plus F-ID)
 		 * Dann Fragebogen in Fragebogentabelle speichern
 		 */
+		return true;
+	}
+	//3 in Antwortvorgegeben
+	public static boolean speichereAntwort(ArrayList<String> antwort, int typId, int fId)
+	{
+		return true;
+	}
+	//1 //aufzteilen auf einzelne Strings usw also nicht ganzes FB objekt
+	public static boolean speichereFragebogen(Fragebogen fb )
+	{
+		return true;
+	}
+	
+	//4 ? wo is TAN-Code vielleicht die ID?
+	public static boolean speichereTan(int fbId, int tId)
+	{
 		return true;
 	}
 
