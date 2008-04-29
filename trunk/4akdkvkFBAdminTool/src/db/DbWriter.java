@@ -120,30 +120,30 @@ public class DbWriter
 	{
 		verbinden();
 
-				try
+		try
+			{
+				PreparedStatement pstmnt = con
+						.prepareStatement("INSERT INTO dbo_Fragen (F_Frage) VALUES (?)");
+				pstmnt.setString(1, frage);
+				int erg = pstmnt.executeUpdate();
+				trennen();
+				if ( erg > 0 )
 					{
-						PreparedStatement pstmnt = con
-								.prepareStatement("INSERT INTO dbo_Fragen (F_Frage) VALUES (?)");
-						pstmnt.setString(1, frage);
-						int erg = pstmnt.executeUpdate();
-						trennen();
-						if ( erg > 0 )
-							{
-								return true;
-							}
-						else
-							{
-								return false;
-							}
-
+						return true;
 					}
-				catch ( SQLException e )
+				else
 					{
-						// TODO Auto-generated catch block
-						trennen();
-						e.printStackTrace();
 						return false;
 					}
+
+			}
+		catch ( SQLException e )
+			{
+				// TODO Auto-generated catch block
+				trennen();
+				e.printStackTrace();
+				return false;
+			}
 
 	}
 
@@ -151,10 +151,11 @@ public class DbWriter
 	// 3 in Antwortvorgegeben
 	public static boolean speichereAntwort(String antwort, int typId)
 	{
-		//Es wird zuerst die ID der MAX Frage ermittelt
-		//Diese ID ist ,wenn die Methode speichereAntwort ausgeführt wird, die FragenId die zu dieser Antwort gehört
-		//siehe SchnittstelleFbzuDB ab Zeile 20
-		int fId = getMaxFID(); //ID der vorher gespeicherten Frage
+		// Es wird zuerst die ID der MAX Frage ermittelt
+		// Diese ID ist ,wenn die Methode speichereAntwort ausgeführt wird, die
+		// FragenId die zu dieser Antwort gehört
+		// siehe SchnittstelleFbzuDB ab Zeile 20
+		int fId = getMaxFID(); // ID der vorher gespeicherten Frage
 		verbinden();
 		if ( fId != -1 )
 			{
@@ -165,9 +166,9 @@ public class DbWriter
 						pstmnt.setInt(1, fId);
 						pstmnt.setInt(2, typId);
 						pstmnt.setString(3, antwort);
-						
+
 						int erg = pstmnt.executeUpdate();
-						
+
 						trennen();
 						if ( erg > 0 )
 							{
@@ -228,27 +229,38 @@ public class DbWriter
 	}
 
 
-	// 4 
-	public static boolean speichereInHaben(int startFId, int endFId, int fbId )
+	// 4
+	public static boolean speichereInHaben(int startFId, int endFId, int fbId)
 	{
 		verbinden();
 		int sortierung = 0;
-		for(int currentfId = startFId; currentfId <= endFId; currentfId++)
+		for ( int currentfId = startFId; currentfId <= endFId; currentfId++ )
 			{
 				try
 					{
 						sortierung++;
-						PreparedStatement pstmnt = con.prepareStatement("INSERT INTO dbo_haben (dbo_haben.F_ID, dbo_haben.FB_ID, dbo_haben.sortierung) VALUES (?,?,?)");
+						PreparedStatement pstmnt = con
+								.prepareStatement("INSERT INTO dbo_haben (F_ID, FB_ID, sortierung) VALUES (?,?,?)");
 						pstmnt.setInt(1, currentfId);
 						pstmnt.setInt(2, fbId);
 						pstmnt.setInt(3, sortierung);
+						int erg = pstmnt.executeUpdate();
+						if ( erg > 0 )
+							{
+								return true;
+							}
+						else
+							{
+								return false;
+							}
+
 					}
 				catch ( SQLException e )
 					{
 						trennen();
 						e.printStackTrace();
 						return false;
-						
+
 					}
 			}
 		trennen();

@@ -1,16 +1,20 @@
 package interfaceGuiDb;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
 import fragen.Frage;
+import fragen.FrageCheckBox;
+import fragen.FrageRadio;
+import fragen.FrageText;
 import fragen.Fragebogen;
 import db.DbWriter;
 
 public class SchnittstelleFBzuDB
 {
-	public static boolean speicherFb()
+	public static boolean speicherFb(Fragebogen fb)
 	{
-		Fragebogen fb = Fragebogen.getInstance();
+		//Fragebogen fb = Fragebogen.getInstance();
 		boolean erg = DbWriter.speichereFragebogen(fb.getTitel(), fb.getBeschreibung(), fb.getEnddatum());
 		if(erg)
 			{
@@ -34,5 +38,38 @@ public class SchnittstelleFBzuDB
 		
 		
 		return true;
+	}
+	
+	public static void main(String[] args)
+	{
+		Fragebogen fb = new Fragebogen();
+		fb.setBeschreibung("Test");
+		fb.setTitel("Test");
+		fb.setEnddatum(new Date(434324234));
+		FrageCheckBox fc = new FrageCheckBox("Sein oder nicht sein?");
+		fc.addAntwort("test1");
+		fc.addAntwort("test2");
+		fc.addAntwort("test3");
+		
+		FrageText ft = new FrageText("Ist der Glaube das Ende allen Wissens?");
+		ft.addAntwort("Test1");
+		ft.addAntwort("Test2");
+		ft.addAntwort("Test3");
+		
+		FrageRadio fr = new FrageRadio("Wer war Karl Marx?");
+		fr.addAntwort("Test122");
+		fr.addAntwort("Test12");
+		fr.addAntwort("Test2");
+		
+		fb.addFrage(fc);
+		fb.addFrage(ft);
+		fb.addFrage(fr);
+		
+        speicherFb(fb);
+		
+		
+		
+		
+		
 	}
 }
