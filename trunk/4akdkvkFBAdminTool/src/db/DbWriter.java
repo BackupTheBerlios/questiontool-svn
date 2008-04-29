@@ -1,9 +1,14 @@
 package db;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 
 import fragen.Frage;
 import fragen.Fragebogen;
@@ -15,74 +20,238 @@ public class DbWriter
 
 	// Der Datenbankname ist noch nicht bekannt, muss noch eingefügt werden
 	// Stellt verbindung her
-	private boolean verbinde()
+	private static boolean verbinden()
 	{
 		try
-		{
-			Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
-			con = DriverManager.getConnection("jdbc:odbc:DBNAME");
-			con.setAutoCommit(true);
-			return true;
-		}
+			{
+				Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
+				con = DriverManager.getConnection("jdbc:odbc:Fragebogen");
+				con.setAutoCommit(true);
+				return true;
+			}
 		catch ( ClassNotFoundException e )
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return false;
-		}
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return false;
+			}
 		catch ( SQLException e )
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return false;
-		}
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return false;
+			}
 	}
 
 
 	// Schließt verbindung
-	private boolean close()
+	private static boolean trennen()
 	{
 		try
-		{
-			con.close();
-			return true;
-		}
+			{
+				con.close();
+				return true;
+			}
 		catch ( SQLException e )
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return false;
-		}
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return false;
+			}
 	}
-	
-	//2 in Fragen und danach in haben
-	public static boolean speichereFrage(Frage f, int fbId)
+
+
+	/*
+	 * ABLAUF zuerst fbid merken dann fragen speichern tabelle: Fragen
+	 * *****fid´s merken mit linzi klären ob Autowert oder nicht alle Antworten
+	 * die zur frage passen speichern Tabelle: Antwortenvorgebene speichern in
+	 * Tabelle: haben(alle Fragen plus F-ID) Dann Fragebogen in
+	 * Fragebogentabelle speichern
+	 */
+	public static int getMaxFbID()
 	{
-		/*
-		 * ABLAUF
-		 * zuerst fbid merken
-		 * dann fragen speichern tabelle: Fragen
-		 * *****fid´s merken mit linzi klären ob Autowert oder nicht
-		 * alle Antworten die zur frage passen speichern Tabelle: Antwortenvorgebene
-		 * speichern in Tabelle: haben(alle Fragen plus F-ID)
-		 * Dann Fragebogen in Fragebogentabelle speichern
-		 */
-		return true;
+		verbinden();
+		try
+			{
+				Statement stmnt = con.createStatement();
+				ResultSet rs = stmnt
+						.executeQuery("SELECT MAX(FB_ID) FROM dbo_Fragebogen");
+				rs.next();
+				int maxId = rs.getInt(1);
+				trennen();
+				return maxId;
+			}
+		catch ( SQLException e )
+			{
+				// TODO Auto-generated catch block
+				trennen();
+				e.printStackTrace();
+				return -1;
+			}
 	}
-	//3 in Antwortvorgegeben
-	public static boolean speichereAntwort(ArrayList<String> antwort, int typId, int fId)
+
+
+	public static int getMaxFID()
 	{
-		return true;
+		verbinden();
+		try
+			{
+				Statement stmnt = con.createStatement();
+				ResultSet rs = stmnt
+						.executeQuery("SELECT MAX(F_ID) FROM dbo_Fragen");
+				rs.next();
+				int maxId = rs.getInt(1);
+				trennen();
+				return maxId;
+			}
+		catch ( SQLException e )
+			{
+				// TODO Auto-generated catch block
+				trennen();
+				e.printStackTrace();
+				return -1;
+			}
+
 	}
-	//1 //aufzteilen auf einzelne Strings usw also nicht ganzes FB objekt
-	public static boolean speichereFragebogen(Fragebogen fb )
+
+
+	// 2 in Fragen und danach in haben
+	public static boolean speichereFrage(String frage)
 	{
-		return true;
+		verbinden();
+
+				try
+					{
+						PreparedStatement pstmnt = con
+								.prepareStatement("INSERT INTO dbo_Fragen (F_Frage) VALUES (?)");
+						pstmnt.setString(1, frage);
+						int erg = pstmnt.executeUpdate();
+						trennen();
+						if ( erg > 0 )
+							{
+								return true;
+							}
+						else
+							{
+								return false;
+							}
+
+					}
+				catch ( SQLException e )
+					{
+						// TODO Auto-generated catch block
+						trennen();
+						e.printStackTrace();
+						return false;
+					}
+
 	}
-	
-	//4 ? wo is TAN-Code vielleicht die ID?
-	public static boolean speichereTan(int fbId, int tId)
+
+
+	// 3 in Antwortvorgegeben
+	public static boolean speichereAntwort(String antwort, int typId)
 	{
+		//Es wird zuerst die ID der MAX Frage ermittelt
+		//Diese ID ist ,wenn die Methode speichereAntwort ausgeführt wird, die FragenId die zu dieser Antwort gehört
+		//siehe SchnittstelleFbzuDB ab Zeile 20
+		int fId = getMaxFID(); //ID der vorher gespeicherten Frage
+		verbinden();
+		if ( fId != -1 )
+			{
+				try
+					{
+						PreparedStatement pstmnt = con
+								.prepareStatement("INSERT INTO dbo_Antwortenvorgegeben (A_F_ID, A_T_ID, A_Antwort) VALUES (?,?,?)");
+						pstmnt.setInt(1, fId);
+						pstmnt.setInt(2, typId);
+						pstmnt.setString(3, antwort);
+						
+						int erg = pstmnt.executeUpdate();
+						
+						trennen();
+						if ( erg > 0 )
+							{
+								return true;
+							}
+						else
+							{
+								return false;
+							}
+					}
+				catch ( SQLException e )
+					{
+						// TODO Auto-generated catch block
+						trennen();
+						e.printStackTrace();
+						return false;
+					}
+			}
+		return false;
+	}
+
+
+	// 1
+	public static boolean speichereFragebogen(String titel,
+			String beschreibung, Date enddatum)
+	{
+		verbinden();
+		try
+			{
+				PreparedStatement pstmnt = con
+						.prepareStatement("INSERT INTO dbo_Fragebogen (FB_Beschreibung, FB_Titel, FB_ausfuellen_bis) "
+								+ "VALUES (?,?,?)");
+				pstmnt.setString(1, beschreibung);
+				pstmnt.setString(2, titel);
+				pstmnt.setDate(3, enddatum);
+
+				int erg = pstmnt.executeUpdate();
+
+				trennen();
+				if ( erg > 0 )
+					{
+						return true;
+					}
+				else
+					{
+						return false;
+					}
+			}
+		catch ( SQLException e )
+			{
+				// TODO Auto-generated catch block
+
+				e.printStackTrace();
+				trennen();
+				return false;
+			}
+
+	}
+
+
+	// 4 
+	public static boolean speichereInHaben(int startFId, int endFId, int fbId )
+	{
+		verbinden();
+		int sortierung = 0;
+		for(int currentfId = startFId; currentfId <= endFId; currentfId++)
+			{
+				try
+					{
+						sortierung++;
+						PreparedStatement pstmnt = con.prepareStatement("INSERT INTO dbo_haben (dbo_haben.F_ID, dbo_haben.FB_ID, dbo_haben.sortierung) VALUES (?,?,?)");
+						pstmnt.setInt(1, currentfId);
+						pstmnt.setInt(2, fbId);
+						pstmnt.setInt(3, sortierung);
+					}
+				catch ( SQLException e )
+					{
+						trennen();
+						e.printStackTrace();
+						return false;
+						
+					}
+			}
+		trennen();
 		return true;
 	}
 

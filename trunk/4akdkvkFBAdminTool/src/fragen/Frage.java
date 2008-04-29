@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 
 
-public class Frage {
+public abstract class Frage {
 	
 	private String frage;
 	private ArrayList<String> antworten;
@@ -40,5 +40,7 @@ public class Frage {
 	public void setFrage(String frage) {
 		this.frage = frage;
 	}
+	//Die Abstrakte Methode ist wichtig, denn ohne diese wäre Speicherung der Frage wesentlich umständlicher
+	public abstract int getTyp();
 
 }
