@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import fragen.Frage;
 
 /**
  * 
@@ -23,11 +24,10 @@ public class DBReader {
 	 */
 	public static void init(String nameODBCDatenbank) throws SQLException, ClassNotFoundException 
 	{
-		Class.forName("sun.jdbc.odbc.JdbcOdbcDriver"); // Treiber Regestrieren,
-		conn = DriverManager.getConnection("jdbc:odbc:" + nameODBCDatenbank); // Verbindung
-		conn.setAutoCommit(true); 
+		Class.forName("sun.jdbc.odbc.JdbcOdbcDriver"); // Treiber Registrieren,
+		conn = DriverManager.getConnection("jdbc:odbc:" + nameODBCDatenbank); // Verbindung zur Db-Herstellen
+		conn.setAutoCommit(true); //Jede Änderung gilt sofort in der Datenbank
 	}
-	
 	
 	/**
 	 * Schließen der DB Verbindung
@@ -40,10 +40,10 @@ public class DBReader {
 	}
 	
 	/**
-	 * Methode mit der der Inhal der Tabelle Fragen in der DB individuell ausgelesne werden kann
+	 * Methode mit der der Inhalt der Tabelle Fragen in der DB individuell ausgelesen werden kann
 	 * @param id int ->id des zu suchenden Datensatzes (Ist 0 wenn ein Select * ausgeführt werden soll)
 	 * @param name String -> Bezeichnung des zu suchenden Datensatzes (Ist "" wenn ein Select * ausgeführt werden soll, sonst der Text der zu suchenden Frage)
-	 * @param where int -> Nach was soll im Wehre Selektiert werden (0= alle (Select *), 1= Select per bezeichnung)
+	 * @param where int -> Nach was soll im Wehre Selektiert werden (0= alle (Select *),1=Select per F_ID, 2= Select per bezeichnung)
 	 * @return -> liefert eine ArrayList mit dem Ergebnis des Selects. Ist das Ergebnis ein einzenler Datensatz, so kann dieser 
 	 * im Array über den Index 0 angesprochen werden.
 	 * @throws SQLException
@@ -71,12 +71,11 @@ public class DBReader {
 		ArrayList<Frage> result = new ArrayList<Frage>();
 
 		while (rs.next()) {
-			result.add(new Frage(rs.getInt(1), rs.getString(2)));
+			result.add(new Frage(rs.getString(2)));
 		}
 
 		rs.close();
 		
-
 		if (result == null)
 		{
 			throw new NullPointerException ();
@@ -85,6 +84,4 @@ public class DBReader {
 		return result;
 		}
 	}
-	
-
 }
