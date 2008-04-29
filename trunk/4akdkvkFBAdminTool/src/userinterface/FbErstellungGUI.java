@@ -19,19 +19,11 @@ import javax.swing.border.LineBorder;
 import javax.swing.SwingUtilities;
 import fragen.*;
 
-
 /**
-* This code was edited or generated using CloudGarden's Jigloo
-* SWT/Swing GUI Builder, which is free for non-commercial
-* use. If Jigloo is being used commercially (ie, by a corporation,
-* company or business for any purpose whatever) then you
-* should purchase a license for each developer using Jigloo.
-* Please visit www.cloudgarden.com for details.
-* Use of Jigloo implies acceptance of these licensing terms.
-* A COMMERCIAL LICENSE HAS NOT BEEN PURCHASED FOR
-* THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED
-* LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
-*/
+ * This was not edited by Jigloo ;D
+ * @author 
+ *
+ */
 public class FbErstellungGUI extends javax.swing.JFrame {
 
 	/**
@@ -158,6 +150,7 @@ public class FbErstellungGUI extends javax.swing.JFrame {
 					jTextPane_Titel_Beschreibung.setBounds(13, 58, 296, 54);
 					jTextPane_Titel_Beschreibung.setBackground(new java.awt.Color(236,236,223));
 					jTextPane_Titel_Beschreibung.setFont(new java.awt.Font("Calibri",0,12));
+					jTextPane_Titel_Beschreibung.setEditable(false);
 				}
 				{
 					jTextPane_Beschreibung_Beschreibung = new JTextPane();
@@ -166,6 +159,7 @@ public class FbErstellungGUI extends javax.swing.JFrame {
 					jTextPane_Beschreibung_Beschreibung.setBounds(13, 163, 296, 52);
 					jTextPane_Beschreibung_Beschreibung.setBackground(new java.awt.Color(236,236,223));
 					jTextPane_Beschreibung_Beschreibung.setFont(new java.awt.Font("Calibri",0,12));
+					jTextPane_Beschreibung_Beschreibung.setEditable(false);
 				}
 				{
 					jTextPane_Beschreibung_Enddatum = new JTextPane();
@@ -174,6 +168,7 @@ public class FbErstellungGUI extends javax.swing.JFrame {
 					jTextPane_Beschreibung_Enddatum.setBounds(13, 331, 296, 87);
 					jTextPane_Beschreibung_Enddatum.setBackground(new java.awt.Color(236,236,223));
 					jTextPane_Beschreibung_Enddatum.setFont(new java.awt.Font("Calibri",0,12));
+					jTextPane_Beschreibung_Enddatum.setEditable(false);
 				}
 				{
 					jButton_Erstellen = new JButton();
@@ -222,7 +217,7 @@ public class FbErstellungGUI extends javax.swing.JFrame {
 					    	            
 					    	            Fragebogen.getInstance().setTitel(jTextField_fbTitel.getText().toString());
 					    	            Fragebogen.getInstance().setBeschreibung(jTextArea_fbBeschreibung.getText().toString());
-					    	            Fragebogen.getInstance().setEnddatum(gc);
+					    	           // Fragebogen.getInstance().setEnddatum(gc);
 
 					    	        }
 					    	        catch (Exception e) {
@@ -266,6 +261,7 @@ public class FbErstellungGUI extends javax.swing.JFrame {
 					jTextPane_Beschreibung_Erstellen.setText("Um den Fragebogen mit den oben angeführten Daten zu erstellen klicken sie auf den Erstellen-Button.");
 					jTextPane_Beschreibung_Erstellen.setBounds(16, 467, 322, 41);
 					jTextPane_Beschreibung_Erstellen.setBackground(new java.awt.Color(236,236,223));
+					jTextPane_Beschreibung_Erstellen.setEditable(false);
 				}
 				{
 					jSeparator1 = new JSeparator();
