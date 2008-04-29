@@ -198,7 +198,9 @@ public class FbErstellungGUI extends javax.swing.JFrame {
 					    		  
 					    		  String[] datum = jTextField_fbEndDatum.getText().toString().split("\\p{Punct}");
 					    		  System.out.println(jTextField_fbEndDatum.getText().toString());
-					    		  
+					    		  for(int i=0;i<datum.length;i++){
+					    			  System.out.println(datum[i].toString());
+					    		  }
 					    		  int day = Integer.valueOf(datum[0]);
 					    		  int month = Integer.valueOf(datum[1]);
 					    		  int year = Integer.valueOf(datum[2]);
