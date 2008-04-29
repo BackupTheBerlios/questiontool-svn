@@ -1,6 +1,7 @@
 package db;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import fragen.Frage;
 
 
 /**
@@ -10,12 +11,10 @@ import java.util.ArrayList;
  */
 public class FBSpeichern {
 	
-	private DBReader dbr = new DBReader ();
-	
 	/**
-	 * 
+	 * Befüllt eine ArrayList<Frage> mit Fragen aus der Datenbank und gibt diese zurück
 	 * @param id int
-	 * @param bezeichnung Strubg
+	 * @param bezeichnung String
 	 * @param where int
 	 * @return fragen ArrayList<Frage>
 	 * @throws SQLException
@@ -29,5 +28,4 @@ public class FBSpeichern {
 		DBReader.close();
 		return fragen;
 	}
-
 }
