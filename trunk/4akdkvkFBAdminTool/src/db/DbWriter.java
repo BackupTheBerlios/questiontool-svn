@@ -232,28 +232,25 @@ public class DbWriter
 	// 4
 	public static boolean speichereInHaben(int startFId, int endFId, int fbId)
 	{
+		System.out.println("FBid: " +fbId);
+		System.out.println("Start: " +startFId);
+		System.out.println("Ende: " +endFId);
 		verbinden();
 		int sortierung = 0;
 		for ( int currentfId = startFId; currentfId <= endFId; currentfId++ )
 			{
 				try
 					{
+						System.out.println("CurrentF: " +currentfId);
 						sortierung++;
 						PreparedStatement pstmnt = con
 								.prepareStatement("INSERT INTO dbo_haben (F_ID, FB_ID, sortierung) VALUES (?,?,?)");
 						pstmnt.setInt(1, currentfId);
 						pstmnt.setInt(2, fbId);
 						pstmnt.setInt(3, sortierung);
-						int erg = pstmnt.executeUpdate();
-						if ( erg > 0 )
-							{
-								return true;
-							}
-						else
-							{
-								return false;
-							}
-
+						pstmnt.executeUpdate();
+						pstmnt.close();
+				
 					}
 				catch ( SQLException e )
 					{
