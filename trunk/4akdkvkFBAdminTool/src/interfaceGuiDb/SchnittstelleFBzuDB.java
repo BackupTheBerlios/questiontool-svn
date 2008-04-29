@@ -12,9 +12,9 @@ import db.DbWriter;
 
 public class SchnittstelleFBzuDB
 {
-	public static boolean speicherFb(Fragebogen fb)
+	public static boolean speicherFb()
 	{
-		//Fragebogen fb = Fragebogen.getInstance();
+		Fragebogen fb = Fragebogen.getInstance();
 		boolean erg = DbWriter.speichereFragebogen(fb.getTitel(), fb.getBeschreibung(), fb.getEnddatum());
 		if(erg)
 			{
@@ -42,7 +42,7 @@ public class SchnittstelleFBzuDB
 	
 	public static void main(String[] args)
 	{
-		Fragebogen fb = new Fragebogen();
+		Fragebogen fb = Fragebogen.getInstance();
 		fb.setBeschreibung("Test");
 		fb.setTitel("Test");
 		fb.setEnddatum(new Date(434324234));
@@ -65,7 +65,7 @@ public class SchnittstelleFBzuDB
 		fb.addFrage(ft);
 		fb.addFrage(fr);
 		
-        speicherFb(fb);
+        speicherFb();
 		
 		
 		
