@@ -10,7 +10,7 @@ public class Fragebogen
 	private static Fragebogen instance = null;
 	private String titel;
 	private String beschreibung;
-	private Date enddatum;
+	private GregorianCalendar enddatum;
 	private ArrayList<Frage> fragenList;
 	private int anzahl;
 
@@ -44,13 +44,13 @@ public class Fragebogen
 	}
 
 
-	public Date getEnddatum()
+	public GregorianCalendar getEnddatum()
 	{
 		return enddatum;
 	}
 
 
-	public void setEnddatum(Date enddatum)
+	public void setEnddatum(GregorianCalendar enddatum)
 	{
 		this.enddatum = enddatum;
 	}

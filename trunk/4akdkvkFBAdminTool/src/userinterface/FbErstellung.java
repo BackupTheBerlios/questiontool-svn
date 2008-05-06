@@ -1,6 +1,7 @@
 package userinterface;
 
 import java.util.GregorianCalendar;
+import fragen.*;
 
 public class FbErstellung
 {	

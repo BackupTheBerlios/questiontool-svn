@@ -18,6 +18,7 @@ import javax.swing.WindowConstants;
 import javax.swing.border.LineBorder;
 import javax.swing.SwingUtilities;
 
+
 /**
 * This code was edited or generated using CloudGarden's Jigloo
 * SWT/Swing GUI Builder, which is free for non-commercial
