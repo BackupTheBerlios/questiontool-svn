@@ -17,6 +17,7 @@ import javax.swing.JTextPane;
 import javax.swing.WindowConstants;
 import javax.swing.border.LineBorder;
 import javax.swing.SwingUtilities;
+import fragen.*;
 
 
 /**
