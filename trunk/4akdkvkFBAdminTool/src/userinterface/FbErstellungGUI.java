@@ -1,8 +1,11 @@
 package userinterface;
+
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import java.util.GregorianCalendar;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -13,25 +16,13 @@ import javax.swing.JSeparator;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
-
 import javax.swing.WindowConstants;
 import javax.swing.border.LineBorder;
 import javax.swing.SwingUtilities;
+
 import fragen.*;
 
 
-/**
-* This code was edited or generated using CloudGarden's Jigloo
-* SWT/Swing GUI Builder, which is free for non-commercial
-* use. If Jigloo is being used commercially (ie, by a corporation,
-* company or business for any purpose whatever) then you
-* should purchase a license for each developer using Jigloo.
-* Please visit www.cloudgarden.com for details.
-* Use of Jigloo implies acceptance of these licensing terms.
-* A COMMERCIAL LICENSE HAS NOT BEEN PURCHASED FOR
-* THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED
-* LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
-*/
 public class FbErstellungGUI extends javax.swing.JFrame {
 
 	/**
@@ -47,9 +38,6 @@ public class FbErstellungGUI extends javax.swing.JFrame {
 			e.printStackTrace();
 		}
 	}
-	
-	
-
 	
 	private JPanel jPanel_mainwindow;
 	private JLabel jLabel_titel_FragebogenErstellung;
@@ -200,19 +188,15 @@ public class FbErstellungGUI extends javax.swing.JFrame {
 					    		  //int year  = 1900; 
 					    		  //long ms   = new GregorianCalendar( year, month, date ).getTimeInMillis(); 
 					    		  //long days = (System.currentTimeMillis() – ms) / (1000*60*60*24); 
-					    		  //System.out.println( days );      
-					    		  
-					    		   
-					    		  
-					    		  String[] datum = jTextField_fbEndDatum.getText().toString().split("\\p{Punct}");
-					    		  System.out.println(jTextField_fbEndDatum.getText().toString());
-					    		  
-					    		  int day = Integer.valueOf(datum[0]);
-					    		  int month = Integer.valueOf(datum[1]);
-					    		  int year = Integer.valueOf(datum[2]);
-					    		  
+					    		  //System.out.println( days );      			    		  
 					    		  
 					    		  try {
+						    			String[] datum = jTextField_fbEndDatum.getText().toString().split("\\p{Punct}");
+							    		System.out.println(jTextField_fbEndDatum.getText().toString());
+							    		 
+							    		int day = Integer.valueOf(datum[0]);
+							    		int month = Integer.valueOf(datum[1]);
+							    		int year = Integer.valueOf(datum[2]);
 					    	            GregorianCalendar gc = new GregorianCalendar();
 					    	            gc.setLenient(false);        // must do this
 					    	            gc.set(GregorianCalendar.YEAR, year);
