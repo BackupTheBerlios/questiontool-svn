@@ -1,4 +1,5 @@
 package db;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -6,7 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import java.util.ArrayList;
-import fragen.Frage;
+import fragen.*;
 
 /**
  * 
@@ -58,21 +59,58 @@ public class DBReader {
 		
 		if (id == 0 && where == 0)
 		{	
-			rs = stmnt.executeQuery("SELECT * FROM Fragen");				
+			rs = stmnt.executeQuery("SELECT DISTINCT dbo_Fragen.F_Frage, dbo_Fragen.F_ID, dbo_Typ.T_ID" +
+					"FROM dbo_Typ INNER JOIN (dbo_Fragen INNER JOIN dbo_Antwortenvorgegeben " +
+								  "ON dbo_Fragen.F_ID = dbo_Antwortenvorgegeben.A_F_ID) " +
+								  "ON dbo_Typ.T_ID = dbo_Antwortenvorgegeben.A_T_ID;");				
 		}			
 		if (id != 0 && where == 1)
 		{
-				rs = stmnt.executeQuery("SELECT * FROM Fragen WHERE f_id=" + id);
+				rs = stmnt.executeQuery("SELECT DISTINCT dbo_Fragen.F_Frage, dbo_Fragen.F_ID, dbo_Typ.T_ID" +
+						"FROM dbo_Typ INNER JOIN (dbo_Fragen INNER JOIN dbo_Antwortenvorgegeben " +
+								  "ON dbo_Fragen.F_ID = dbo_Antwortenvorgegeben.A_F_ID) " +
+								  "ON dbo_Typ.T_ID = dbo_Antwortenvorgegeben.A_T_ID" +
+						"WHERE dbo_Fragen.F_ID=" + id+";");
 		}
 		if (bezeichnung.length() > 0 && where == 2)
 		{
-				rs = stmnt.executeQuery("SELECT * FROM Fragen WHERE f_frage LIKE" + bezeichnung);
+			rs = stmnt.executeQuery("SELECT DISTINCT dbo_Fragen.F_Frage, dbo_Fragen.F_ID, dbo_Typ.T_ID" +
+					"FROM dbo_Typ INNER JOIN (dbo_Fragen INNER JOIN dbo_Antwortenvorgegeben " +
+							  "ON dbo_Fragen.F_ID = dbo_Antwortenvorgegeben.A_F_ID) " +
+							  "ON dbo_Typ.T_ID = dbo_Antwortenvorgegeben.A_T_ID" +
+					"WHERE dbo_Fragen.F_Frage like '" + bezeichnung +"';");
 		}
 
 		ArrayList<Frage> result = new ArrayList<Frage>();
 
 		while (rs.next()) {
-			result.add(new Frage(rs.getString(2)));
+			int typ = rs.getInt(3);
+			
+			switch(typ)
+			{
+				//Radio Buttons
+				case 1: result.add(new FrageRadio(rs.getString(2)));
+						break;
+				//Checkbox
+				case 2: result.add(new FrageCheckBox(rs.getString(2)));
+						break;
+				//Textfrage
+				case 3:
+						result.add(new FrageText(rs.getString(2)));
+						break;
+				//Dropdown Frage
+				case 4:
+					result.add(new FrageDropdown(rs.getString(2)));
+					break;
+				//Textarea Frage
+				case 5:
+					result.add(new FrageTextArea(rs.getString(2)));
+					break;
+				//Frage mit Notensystem
+				case 6:
+					result.add(new FrageNoten(rs.getString(2)));
+					break;
+			}
 		}
 
 		rs.close();
