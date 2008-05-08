@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 
 import javax.swing.ImageIcon;
@@ -19,6 +21,8 @@ import javax.swing.JTextPane;
 import javax.swing.WindowConstants;
 import javax.swing.border.LineBorder;
 import javax.swing.SwingUtilities;
+
+import db.DbWriter;
 
 import fragen.*;
 
@@ -200,16 +204,28 @@ public class FbErstellungGUI extends javax.swing.JFrame {
 					    	            GregorianCalendar gc = new GregorianCalendar();
 					    	            gc.setLenient(false);        // must do this
 					    	            gc.set(GregorianCalendar.YEAR, year);
-					    	            gc.set(GregorianCalendar.MONTH, month);// invalid month
+					    	            gc.set(GregorianCalendar.MONTH, (month-1));// invalid month
+					    	            //-1 muss man rechnen da bei 0 begonnen wird zu zählen 
+					    	            //d.h. Dezember = 11 =) (12-1)
 					    	            gc.set(GregorianCalendar.DATE, day);
 					    	            gc.getTime(); // exception thrown here
-					    	            
 					    	            //Hier kommt das Weiterleiten!!!!!!
 					    	            
-					    	            
+					    	            //Test bemerkung "DATUM" --> 1999 und auch 99 geht bei Jahreszahl
 					    	            Fragebogen.getInstance().setTitel(jTextField_fbTitel.getText().toString());
 					    	            Fragebogen.getInstance().setBeschreibung(jTextArea_fbBeschreibung.getText().toString());
-					    	            Fragebogen.getInstance().setEnddatum(gc);
+					    	            
+					    	            String datezumabspeichern =day +"."+month+"."+year;
+					    	            
+					    	            SimpleDateFormat sdf = new SimpleDateFormat( "dd.mm.yyyy" );
+					    	            Date dt = (Date) sdf.parse( datezumabspeichern );
+					    	            System.out.println(dt);
+					    	            
+					    	            
+					    	            Fragebogen.getInstance().setEnddatum(dt);
+					    	            DbWriter.speichereFragebogen(Fragebogen.getInstance().getTitel(), 
+					    	            		Fragebogen.getInstance().getBeschreibung(),
+					    	            		Fragebogen.getInstance().getEnddatum());
 
 					    	        }
 					    	        catch (Exception e) {
@@ -283,7 +299,4 @@ public class FbErstellungGUI extends javax.swing.JFrame {
 			e.printStackTrace();
 		}
 	}
-	
-	
-
 }

@@ -1,8 +1,7 @@
 package fragen;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
 
 public class Fragebogen
 {
@@ -10,7 +9,7 @@ public class Fragebogen
 	private static Fragebogen instance = null;
 	private String titel;
 	private String beschreibung;
-	private GregorianCalendar enddatum;
+	private Date enddatum;
 	private ArrayList<Frage> fragenList;
 	private int anzahl;
 
@@ -31,12 +30,10 @@ public class Fragebogen
 		return instance;
 	}
 
-
 	public String getBeschreibung()
 	{
 		return beschreibung;
 	}
-
 
 	public void setBeschreibung(String beschreibung)
 	{
@@ -44,17 +41,16 @@ public class Fragebogen
 	}
 
 
-	public GregorianCalendar getEnddatum()
+	public Date getEnddatum()
 	{
 		return enddatum;
 	}
 
-
-	public void setEnddatum(GregorianCalendar enddatum)
+	public void setEnddatum(Date enddatum)
 	{
+		//Datum zerlegen und Monat + 1 rechnen
 		this.enddatum = enddatum;
 	}
-
 
 	public ArrayList<Frage> getFragenList()
 	{

@@ -1,6 +1,7 @@
 package interfaceGuiDb;
 
-import java.sql.Date;
+
+import java.util.Date;
 import java.util.ArrayList;
 
 import fragen.Frage;
