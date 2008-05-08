@@ -1,13 +1,15 @@
 package db;
 
+
 import java.sql.Connection;
-import java.sql.Date;
+import java.util.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import fragen.Frage;
@@ -61,7 +63,7 @@ public class DbWriter
 	}
 
 
-	/*
+	/**
 	 * ABLAUF zuerst fbid merken dann fragen speichern tabelle: Fragen
 	 * *****fid´s merken mit linzi klären ob Autowert oder nicht alle Antworten
 	 * die zur frage passen speichern Tabelle: Antwortenvorgebene speichern in
@@ -191,19 +193,26 @@ public class DbWriter
 	}
 
 
-	// 1
+	@SuppressWarnings("deprecation")
 	public static boolean speichereFragebogen(String titel,
 			String beschreibung, Date enddatum)
 	{
 		verbinden();
 		try
 			{
+				int month = enddatum.getMonth();
+				month++;
+				enddatum.setMonth(month);
 				PreparedStatement pstmnt = con
 						.prepareStatement("INSERT INTO dbo_Fragebogen (FB_Beschreibung, FB_Titel, FB_ausfuellen_bis) "
 								+ "VALUES (?,?,?)");
+				//Datumsproblem lösen
+				Calendar stCal = Calendar.getInstance();
+				java.sql.Date sqlendDate = new java.sql.Date(stCal.getTimeInMillis());
+				//Statemnet aufbauen
 				pstmnt.setString(1, beschreibung);
 				pstmnt.setString(2, titel);
-				pstmnt.setDate(3, enddatum);
+				pstmnt.setDate(3, sqlendDate);
 
 				int erg = pstmnt.executeUpdate();
 
