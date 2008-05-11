@@ -69,7 +69,11 @@ public class FbNotenFrage extends javax.swing.JFrame {
 				{
 					jTextPane_Beschreibung_Beschreibung = new JTextPane();
 					jPanel_mainpanel.add(jTextPane_Beschreibung_Beschreibung);
-					jTextPane_Beschreibung_Beschreibung.setText("Hier sehen Sie die Vorschau der Frage, welche Sie hier erstellen. Die Erstellung der Frage bestätigen Sie anschließend mit dem Button \"Frage inkl. Antworten Erstellen\". Zu beachten ist, Sie geben hier nur die gewünschte Frage ein, die Antwortmöglichkeiten sind Noten in der Notenskala zwischen 1-5.");
+					jTextPane_Beschreibung_Beschreibung.setText("Hier sehen Sie die Vorschau der Frage, " +
+							"welche Sie hier erstellen. Die Erstellung der Frage bestätigen Sie anschließend mit " +
+							"dem Button \"Frage erstellen\". Zu beachten ist, Sie geben hier" +
+							" nur die gewünschte Frage ein, die Antwortmöglichkeiten werden automatisch mit der " +
+							"Notenskala zwischen 1-5 definiert.");
 					jTextPane_Beschreibung_Beschreibung.setEditable(false);
 					jTextPane_Beschreibung_Beschreibung.setBackground(new java.awt.Color(236,236,223));
 					jTextPane_Beschreibung_Beschreibung.setFont(new java.awt.Font("Calibri",0,12));
