@@ -1,33 +1,8 @@
 <?php
 
-/* $Id: phplot.php,v 1.141 2008/01/14 02:09:41 lbayuk Exp $ */
-
-/*
- * PHPLOT Version 5.0.5
- * Copyright (C) 1998-2008 Afan Ottenheimer.  Released under
- * the GPL and PHP licenses as stated in the the README file which should
- * have been included with this document.
- *
- * Co-author and maintainer (2003-2005)
- * Miguel de Benito Delgado <nonick AT vodafone DOT es>
- *
- * Maintainer (2006-present)
- * <lbayuk AT users DOT sourceforge DOT net>
- *
- * Visit http://sourceforge.net/projects/phplot/
- * for PHPlot documentation, downloads, and discussions.
- *
- * Requires PHP 5.2.x or later. (PHP 4 is unsupported as of Jan 2008)
- */
 
 class PHPlot {
 
-    /* I have removed internal variable declarations, some isset() checking was required,
-     * but now the variables left are those which can be tweaked by the user. This is intended to
-     * be the first step towards moving most of the Set...() methods into a subclass which will be
-     * used only when strictly necessary. Many users will be able to put default values here in the
-     * class and thus avoid memory overhead and reduce parsing times.
-     */
     //////////////// CONFIG PARAMETERS //////////////////////
 
     var $is_inline = FALSE;             // FALSE = Sends headers, TRUE = sends just raw image data
@@ -376,10 +351,6 @@ class PHPlot {
         return TRUE;
     }
 
-
-    /*
-     *
-     */
     function SetBackgroundColor($which_color)
     {
         $this->bg_color= $which_color;
@@ -387,9 +358,6 @@ class PHPlot {
         return isset($this->ndx_bg_color);
     }
 
-    /*
-     *
-     */
     function SetPlotBgColor($which_color)
     {
         $this->plot_bg_color= $which_color;
@@ -397,9 +365,6 @@ class PHPlot {
         return isset($this->ndx_plot_bg_color);
     }
 
-   /*
-    *
-    */
     function SetTitleColor($which_color)
     {
         $this->title_color= $which_color;
@@ -407,9 +372,6 @@ class PHPlot {
         return isset($this->ndx_title_color);
     }
 
-    /*
-     *
-     */
     function SetTickColor ($which_color)
     {
         $this->tick_color= $which_color;
@@ -428,10 +390,6 @@ class PHPlot {
         return isset($this->ndx_title_color);
     }
 
-
-    /*
-     *
-     */
     function SetTextColor ($which_color)
     {
         $this->text_color= $which_color;
@@ -439,10 +397,6 @@ class PHPlot {
         return isset($this->ndx_text_color);
     }
 
-
-    /*
-     *
-     */
     function SetLightGridColor ($which_color)
     {
         $this->light_grid_color= $which_color;
@@ -450,10 +404,6 @@ class PHPlot {
         return isset($this->ndx_light_grid_color);
     }
 
-
-    /*
-     *
-     */
     function SetGridColor ($which_color)
     {
         $this->grid_color = $which_color;
@@ -461,10 +411,6 @@ class PHPlot {
         return isset($this->ndx_grid_color);
     }
 
-
-    /*
-     *
-     */
     function SetImageBorderColor($which_color)
     {
         $this->i_border = $which_color;
@@ -473,10 +419,6 @@ class PHPlot {
         return isset($this->ndx_i_border);
     }
 
-
-    /*
-     *
-     */
     function SetTransparentColor($which_color)
     {
         $ndx = $this->SetIndexColor($which_color);
@@ -485,7 +427,6 @@ class PHPlot {
         ImageColorTransparent($this->img, $ndx);
         return TRUE;
     }
-
 
     /*!
      * Sets the array of colors to be used. It can be user defined, a small predefined one
@@ -601,10 +542,6 @@ class PHPlot {
         return $this->SetDataBorderColors($which_border);
     } // function SetDataColors()
 
-
-    /*!
-     *
-     */
     function SetDataBorderColors($which_br = NULL)
     {
         if (is_null($which_br) && is_array($this->data_border_colors)) {
@@ -716,9 +653,6 @@ class PHPlot {
         return TRUE;
     }
 
-    /*!
-     *
-     */
     function SetLineStyles($which_ls=NULL)
     {
         if (is_null($which_ls)) {
@@ -732,11 +666,9 @@ class PHPlot {
         return TRUE;
     }
 
-
 /////////////////////////////////////////////
 //////////////                 TEXT and FONTS
 /////////////////////////////////////////////
-
 
     /*!
      * Sets number of pixels between lines of the same text.
