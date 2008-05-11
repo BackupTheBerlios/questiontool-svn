@@ -1,6 +1,5 @@
 package db;
 
-
 import java.sql.Connection;
 import java.util.Date;
 import java.sql.DriverManager;
@@ -8,20 +7,24 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 
-import fragen.Frage;
-import fragen.Fragebogen;
-
+/**
+ * 
+ * @author Sparky
+ *
+ */
 public class DbWriter
 {
 	public static Connection con;
 
 
-	// Der Datenbankname ist noch nicht bekannt, muss noch eingefügt werden
-	// Stellt verbindung her
+	/**
+	 * 
+	 * Der Datenbankname ist noch nicht bekannt, muss noch eingefügt werden
+	 * Stellt verbindung her
+	 * 
+	 */
 	private static boolean verbinden()
 	{
 		try
@@ -46,7 +49,9 @@ public class DbWriter
 	}
 
 
-	// Schließt verbindung
+	/**
+	 * Schließt verbindung
+	 */ 
 	private static boolean trennen()
 	{
 		try
