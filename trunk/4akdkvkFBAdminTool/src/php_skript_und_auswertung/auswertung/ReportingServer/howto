@@ -5,5 +5,8 @@ MSSQL
 Reporting Services
 
 Auf http://localhost/Reports ladet man den Report1.rdl herauf.
-Dann steht der Report beispielsweise unter http://localhost/ReportServer/Pages/ReportViewer.aspx?%2fMeinungsforschung&rs:Command=Render zur Verfügung.
-Der User kann auswählen, welchen Fragebogen er sich gerne anschauen möchte, über ein Dropdown Feld. Die ausgewerteten Daten können dann angesehen werden oder in verschiedene Formate exportiert werden.
+Dann steht der Report beispielsweise unter 
+http://localhost/ReportServer/Pages/ReportViewer.aspx?%2fMeinungsforschung&rs:Command=Render
+zur Verfügung.
+Der User kann über ein Dropdown Feld auswählen, welchen Fragebogen er sich gerne anschauen möchte. 
+Die ausgewerteten Daten können dann angesehen werden oder in verschiedene Formate exportiert werden.
