@@ -268,7 +268,8 @@ public class FbErstellungGUI extends javax.swing.JFrame {
 				    	            	for(int j=0;j<anzahlDerNullenInDerID;j++)
 				    	            		fragebogenID+="0";
 				    	            	fragebogenID+=id;
-				    	            	System.out.println(fragebogenID);				    	            	
+				    	            	//Fragebogen Id an Konsole ausgeben
+				    	            	//System.out.println(fragebogenID);				    	            	
 				    	            	erste5Stellen += fragebogenID;					    	            
 				    	            	String nächste4Stellen="";
 					    	            for(int i=1;i<anzahl+1;i++){					    	            	
@@ -286,9 +287,14 @@ public class FbErstellungGUI extends javax.swing.JFrame {
 					    	            	}			    	            	
 					    	            	nächste4Stellen+=""+i;
 					    	            	tans.add( erste5Stellen+nächste4Stellen+tag+monat+jahreszahl+letzte2stellen);
-					    	            	System.out.println("Tan:"+erste5Stellen+nächste4Stellen+tag+monat+jahreszahl+letzte2stellen);
+					    	            	//Probeweise ausgeben auf konsole
+					    	            	//System.out.println("Tan:"+erste5Stellen+nächste4Stellen+tag+monat+jahreszahl+letzte2stellen);
 					    	            }
 					    	            Fragebogen.getInstance().setTans( tans );
+					    	            JOptionPane.showMessageDialog(jPanel_mainwindow,
+		  			                              "Fragebogen wurde erfolgreich erstellt. Sie können nun Fragen zuordnen",
+		  			                              "Erfolg",
+		  			                              JOptionPane.INFORMATION_MESSAGE) ;	
 
 					    	        }
 					    	        catch (Exception e) {
