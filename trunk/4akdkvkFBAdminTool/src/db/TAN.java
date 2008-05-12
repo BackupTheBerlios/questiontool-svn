@@ -23,10 +23,9 @@ public class TAN {
 	}
 	
 	/**
-	 * 
 	 * @param fbId -> int -> Die Id des zu erstellenden Fragebogens
 	 * @param anzahlbefragte -> int -> Die Anzahl der Befragten für die dieser Fragebogen erstellt werden soll
-	 * @param spezialTan -> String -> Setz die letzten beiden stellen des TANs nach individuellen Wünschen (ist Standardmäßig mit "00" zu stezen!)
+	 * @param spezialTan -> String -> Setzt die letzten beiden stellen des TANs nach individuellen wünschen (ist Standardmäßig mit "00" zu stezen!)
 	 * @return -> ArrayList<String> -> Die erzeugten TANs (anzusprechen von Index 0 bis (anzahlbefragte - 1)) 
 	 * TAN: Xxxxx xxxx xx xx xx xx
 	 * Ersten 5 Stellen -> Fragebogen ID
@@ -113,7 +112,6 @@ public class TAN {
 			}
 			a = fragebogenId + anzahl + dayStr + "";
 						
-			
 			//Erstellen der nächsten 2 Stellen (Monat der Erstellung):
 			int month = gc.get(Calendar.MONTH);
 			//Monat muss +1 gerechnet werden da die Monate intern von 0 bis 11 gezählt werden

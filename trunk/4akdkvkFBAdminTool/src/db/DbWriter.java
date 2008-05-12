@@ -239,7 +239,6 @@ public class DbWriter
 				trennen();
 				return false;
 			}
-
 	}
 
 
