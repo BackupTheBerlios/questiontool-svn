@@ -4,9 +4,11 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
+import javax.swing.BorderFactory;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -27,6 +29,19 @@ import db.DbWriter;
 import fragen.*;
 
 
+
+/**
+* This code was edited or generated using CloudGarden's Jigloo
+* SWT/Swing GUI Builder, which is free for non-commercial
+* use. If Jigloo is being used commercially (ie, by a corporation,
+* company or business for any purpose whatever) then you
+* should purchase a license for each developer using Jigloo.
+* Please visit www.cloudgarden.com for details.
+* Use of Jigloo implies acceptance of these licensing terms.
+* A COMMERCIAL LICENSE HAS NOT BEEN PURCHASED FOR
+* THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED
+* LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
+*/
 public class FbErstellungGUI extends javax.swing.JFrame {
 
 	/**
@@ -49,6 +64,10 @@ public class FbErstellungGUI extends javax.swing.JFrame {
 	private JScrollPane jScrollPane_fbBeschreibung;
 	private JLabel jLabel_fbEndDatum;
 	private JButton jButton_Erstellen;
+	private JSeparator jSeparator4;
+	private JTextField jTextField_Anzahl;
+	private JLabel jLabel1;
+	private JTextPane jTextPane1;
 	private JLabel jLabel_logo;
 	private JSeparator jSeparator3;
 	private JSeparator jSeparator2;
@@ -174,7 +193,7 @@ public class FbErstellungGUI extends javax.swing.JFrame {
 					jButton_Erstellen = new JButton();
 					jPanel_mainwindow.add(jButton_Erstellen);
 					jButton_Erstellen.setText("erstellen");
-					jButton_Erstellen.setBounds(122, 509, 92, 26);
+					jButton_Erstellen.setBounds(122, 615, 92, 26);
 					jButton_Erstellen.setFont(new java.awt.Font("Calibri",0,12));
 					jButton_Erstellen.addActionListener(new ActionListener(){
 					      public void actionPerformed(ActionEvent arg0) {
@@ -195,7 +214,7 @@ public class FbErstellungGUI extends javax.swing.JFrame {
 					    		  //System.out.println( days );      			    		  
 					    		  
 					    		  try {
-						    			String[] datum = jTextField_fbEndDatum.getText().toString().split("\\p{Punct}");
+					    			  String[] datum = jTextField_fbEndDatum.getText().toString().split("\\p{Punct}");
 							    		System.out.println(jTextField_fbEndDatum.getText().toString());
 							    		 
 							    		int day = Integer.valueOf(datum[0]);
@@ -226,6 +245,77 @@ public class FbErstellungGUI extends javax.swing.JFrame {
 					    	            DbWriter.speichereFragebogen(Fragebogen.getInstance().getTitel(), 
 					    	            		Fragebogen.getInstance().getBeschreibung(),
 					    	            		Fragebogen.getInstance().getEnddatum());
+					    	            
+					    	            ArrayList<String> tans = new ArrayList<String>();
+					    	            /*TAN: Xxxxx xxxx xx xx xx xx
+					    	            * Ersten 5 Stellen -> Fragebogen ID
+					    	            * N‰chsten 4 Stellen -> Benutzer IDs d.h. wenn den Fragebogen 30 Leute 
+					    	            ausf¸llen sollen dann stehen da die Zahlen 0 bis 29
+					    	            * N‰chsten 2 Stellen -> Tag (01 - 31)
+					    	            * N‰chsten 2 Stellen -> Monat (01 ñ 12)
+					    	            * N‰chsten 2 Stellen -> Jahreszahl (01 - 12)
+					    	            * letzten beiden Stellen -> Als reserve, sollen standardm‰ﬂig mit 00 
+					    	            */
+					    	            
+					    	            String id = ""+Fragebogen.getInstance().getId();
+					    	            int anzahl = Integer.valueOf(jTextField_Anzahl.getText());
+					    	            String tag;
+					    	            if(day<10)
+					    	            	tag = "0"+day;
+					    	            else
+					    	            	tag =""+day;
+					    	            
+					    	            String monat;
+					    	            if(month<10)
+					    	            	monat = "0"+month;
+					    	            else
+					    	            	monat =""+month;
+					    	            
+					    	            String jahreszahl;
+					    	            if(day<10)
+					    	            	jahreszahl = "0"+year;
+					    	            else
+					    	            	jahreszahl =""+year;
+					    	            
+					    	            
+					    	            String letzte2stellen="00";
+					    	            
+					    	            String fragebogenID="";
+					    	            String erste5Stellen ="";
+					    	            int anzahlDerNullenInDerID =0;
+					    	            anzahlDerNullenInDerID = 5-id.length();
+				    	            	for(int j=0;j<anzahlDerNullenInDerID;j++)
+				    	            		fragebogenID+="0";
+				    	            	fragebogenID+=id;
+				    	            	System.out.println(fragebogenID);
+				    	            	
+				    	            	erste5Stellen += fragebogenID;
+					    	            
+				    	            	String n‰chste4Stellen="";
+					    	            for(int i=1;i<anzahl+1;i++){
+					    	            	
+					    	            	if(i<10)
+					    	            		n‰chste4Stellen="000";
+					    	            	else{
+					    	            		if(i<100)
+						    	            		n‰chste4Stellen="00";
+					    	            		else{
+					    	            			if(i<1000)
+							    	            		n‰chste4Stellen="0";
+					    	            			else
+							    	            		n‰chste4Stellen="";
+					    	            		}
+						    	            	
+					    	            	}
+					    	            	
+					    	            	
+					    	            	
+					    	            	n‰chste4Stellen+=""+i;
+					    	       
+					    	            	tans.add( erste5Stellen+n‰chste4Stellen+tag+monat+jahreszahl+letzte2stellen);
+					    	            	System.out.println("Tan:"+erste5Stellen+n‰chste4Stellen+tag+monat+jahreszahl+letzte2stellen);
+					    	            }
+					    	            Fragebogen.getInstance().setTans( tans );
 
 					    	        }
 					    	        catch (Exception e) {
@@ -267,7 +357,7 @@ public class FbErstellungGUI extends javax.swing.JFrame {
 					jTextPane_Beschreibung_Erstellen = new JTextPane();
 					jPanel_mainwindow.add(jTextPane_Beschreibung_Erstellen);
 					jTextPane_Beschreibung_Erstellen.setText("Um den Fragebogen mit den oben angef¸hrten Daten zu erstellen klicken sie auf den Erstellen-Button.");
-					jTextPane_Beschreibung_Erstellen.setBounds(16, 467, 322, 41);
+					jTextPane_Beschreibung_Erstellen.setBounds(16, 573, 322, 41);
 					jTextPane_Beschreibung_Erstellen.setBackground(new java.awt.Color(236,236,223));
 					jTextPane_Beschreibung_Erstellen.setEditable(false);
 				}
@@ -287,6 +377,32 @@ public class FbErstellungGUI extends javax.swing.JFrame {
 					jSeparator3.setBounds(16, 452, 315, 9);
 				}
 				{
+					jTextPane1 = new JTextPane();
+					jPanel_mainwindow.add(jTextPane1);
+					jTextPane1.setText("Geben Sie hier die Anzahl der zu befragenden Personen ein, diese ist wichtig f¸r die TAN-Generierung!");
+					jTextPane1.setEditable(false);
+					jTextPane1.setBackground(new java.awt.Color(236,236,223));
+					jTextPane1.setBounds(16, 461, 322, 41);
+				}
+				{
+					jLabel1 = new JLabel();
+					jPanel_mainwindow.add(jLabel1);
+					jLabel1.setText("Anzahl:");
+					jLabel1.setBackground(new java.awt.Color(236,236,223));
+					jLabel1.setBounds(16, 508, 86, 16);
+				}
+				{
+					jTextField_Anzahl = new JTextField();
+					jPanel_mainwindow.add(jTextField_Anzahl);
+					jTextField_Anzahl.setBounds(102, 505, 80, 19);
+					jTextField_Anzahl.setBorder(new LineBorder(new java.awt.Color(0,0,0), 1, false));
+				}
+				{
+					jSeparator4 = new JSeparator();
+					jPanel_mainwindow.add(jSeparator4);
+					jSeparator4.setBounds(16, 552, 315, 15);
+				}
+				{
 					//jLabel_logo = new JLabel();
 					//jPanel_mainwindow.add(jLabel_logo);
 					//jLabel_logo.setIcon(new ImageIcon(getClass().getClassLoader().getResource("UserInterface/logo.jpg")));
@@ -294,7 +410,7 @@ public class FbErstellungGUI extends javax.swing.JFrame {
 				}
 			}
 			pack();
-			this.setSize(376, 583);
+			this.setSize(376, 689);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -12,6 +12,8 @@ public class Fragebogen
 	private Date enddatum;
 	private ArrayList<Frage> fragenList;
 	private int anzahl;
+	private ArrayList<String> tans;
+	private int id;
 
 
 	 
@@ -98,5 +100,25 @@ public class Fragebogen
 	{
 		this.anzahl = anzahl;
 	}
+
+	public void setTans( ArrayList<String> tans )
+    {
+	    this.tans = tans;
+    }
+
+	public ArrayList<String> getTans()
+    {
+	    return tans;
+    }
+
+	public void setId( int id )
+    {
+	    this.id = id;
+    }
+
+	public int getId()
+    {
+	    return id;
+    }
 
 }
