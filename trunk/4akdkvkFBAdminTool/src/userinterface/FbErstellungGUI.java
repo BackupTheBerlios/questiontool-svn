@@ -6,10 +6,8 @@ import java.awt.event.ActionListener;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
-import javax.swing.BorderFactory;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -29,20 +27,6 @@ import db.DbWriter;
 
 import fragen.*;
 
-
-
-/**
-* This code was edited or generated using CloudGarden's Jigloo
-* SWT/Swing GUI Builder, which is free for non-commercial
-* use. If Jigloo is being used commercially (ie, by a corporation,
-* company or business for any purpose whatever) then you
-* should purchase a license for each developer using Jigloo.
-* Please visit www.cloudgarden.com for details.
-* Use of Jigloo implies acceptance of these licensing terms.
-* A COMMERCIAL LICENSE HAS NOT BEEN PURCHASED FOR
-* THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED
-* LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
-*/
 public class FbErstellungGUI extends javax.swing.JFrame {
 
 	/**
@@ -244,9 +228,9 @@ public class FbErstellungGUI extends javax.swing.JFrame {
 					    	            
 					    	            
 					    	            Fragebogen.getInstance().setEnddatum(dt);
-					    	           // DbWriter.speichereFragebogen(Fragebogen.getInstance().getTitel(), 
-					    	            //		Fragebogen.getInstance().getBeschreibung(),
-					    	            	//	Fragebogen.getInstance().getEnddatum());
+					    	            DbWriter.speichereFragebogen(Fragebogen.getInstance().getTitel(), 
+					    	           	Fragebogen.getInstance().getBeschreibung(),
+					    	           	Fragebogen.getInstance().getEnddatum());
 					    	            
 					    	            ArrayList<String> tans = new ArrayList<String>();
 					    	            /*TAN: Xxxxx xxxx xx xx xx xx
@@ -259,30 +243,24 @@ public class FbErstellungGUI extends javax.swing.JFrame {
 					    	            * letzten beiden Stellen -> Als reserve, sollen standardm‰ﬂig mit 00 
 					    	            */
 					    	            
-					    	            String id = ""+Fragebogen.getInstance().getId();
-					    	            
+					    	            String id = ""+Fragebogen.getInstance().getId();				    	            
 					    	            int anzahl = Integer.valueOf(jTextField_Anzahl.getText());
 					    	            String tag;
 					    	            if(day<10)
 					    	            	tag = "0"+day;
 					    	            else
 					    	            	tag =""+day;
-					    	            
 					    	            String monat;
 					    	            if(month<10)
 					    	            	monat = "0"+month;
 					    	            else
 					    	            	monat =""+month;
-					    	            
 					    	            String jahreszahl;
 					    	            if(day<10)
 					    	            	jahreszahl = "0"+year;
 					    	            else
-					    	            	jahreszahl =""+year;
-					    	            
-					    	            
+					    	            	jahreszahl =""+year;				    	            
 					    	            String letzte2stellen="00";
-					    	            
 					    	            String fragebogenID="";
 					    	            String erste5Stellen ="";
 					    	            int anzahlDerNullenInDerID =0;
@@ -290,13 +268,10 @@ public class FbErstellungGUI extends javax.swing.JFrame {
 				    	            	for(int j=0;j<anzahlDerNullenInDerID;j++)
 				    	            		fragebogenID+="0";
 				    	            	fragebogenID+=id;
-				    	            	System.out.println(fragebogenID);
-				    	            	
-				    	            	erste5Stellen += fragebogenID;
-					    	            
+				    	            	System.out.println(fragebogenID);				    	            	
+				    	            	erste5Stellen += fragebogenID;					    	            
 				    	            	String n‰chste4Stellen="";
-					    	            for(int i=1;i<anzahl+1;i++){
-					    	            	
+					    	            for(int i=1;i<anzahl+1;i++){					    	            	
 					    	            	if(i<10)
 					    	            		n‰chste4Stellen="000";
 					    	            	else{
@@ -307,14 +282,9 @@ public class FbErstellungGUI extends javax.swing.JFrame {
 							    	            		n‰chste4Stellen="0";
 					    	            			else
 							    	            		n‰chste4Stellen="";
-					    	            		}
-						    	            	
-					    	            	}
-					    	            	
-					    	            	
-					    	            	
+					    	            		}    	
+					    	            	}			    	            	
 					    	            	n‰chste4Stellen+=""+i;
-					    	       
 					    	            	tans.add( erste5Stellen+n‰chste4Stellen+tag+monat+jahreszahl+letzte2stellen);
 					    	            	System.out.println("Tan:"+erste5Stellen+n‰chste4Stellen+tag+monat+jahreszahl+letzte2stellen);
 					    	            }
@@ -325,39 +295,28 @@ public class FbErstellungGUI extends javax.swing.JFrame {
 					    	        	JOptionPane.showMessageDialog(jPanel_mainwindow,
 							  			                              "Datum existiert nicht, vergewissern Sie sich ob es ein richtiges Datum ist, bzw. haben Sie keine korrekte Anzahl der Teilnehmer angegeben",
 							  			                              "Error",
-							  			                              JOptionPane.ERROR_MESSAGE) ;
-							  			                              
+							  			                              JOptionPane.ERROR_MESSAGE) ;							  			                              
 					    	        	e.printStackTrace() ;
-					    	        }
-					    	    
-					    		  
+					    	        }				    		  
 					    	  }
 					    	  else{
 					    		  
-					    		  String meldung="";
-					    		  
+					    		  String meldung="";					    		  
 					    		  if(jTextField_fbTitel.getText().toString().equals(""))
-					    			  meldung+=" -Titel\n";
-					    		  
+					    			  meldung+=" -Titel\n";					    		  
 					    		  if(jTextArea_fbBeschreibung.getText().toString().equals(""))
-					    			  meldung+=" -Beschreibung\n";
-					    		  
+					    			  meldung+=" -Beschreibung\n";					    		  
 					    		  if(jTextField_fbEndDatum.getText().toString().equals(""))
-					    			  meldung+=" -EndDatum";
-					    		  
+					    			  meldung+=" -EndDatum";					    		  
 					    		  if(jTextField_Anzahl.getText().toString().equals(""))
-					    			  meldung+=" -Anzahl der Teilnehmer";
-					    		  
-					    		  
+					    			  meldung+=" -Anzahl der Teilnehmer";					    						    		  
 					    		  System.out.println("hehehe");
 					    		  JOptionPane.showMessageDialog(jPanel_mainwindow,
 					  			                              "Bitte f¸llen Sie alle Felder aus!\n" +
 					  			                              "Sie haben folgende Felder nicht ausgef¸llt: \n"+meldung,
 					  			                              "Error",
 					  			                              JOptionPane.ERROR_MESSAGE) ;
-					    	  }
-					    	  
-					    	  
+					    	  }		    	  
 					      }
 					});
 
@@ -412,10 +371,10 @@ public class FbErstellungGUI extends javax.swing.JFrame {
 					jSeparator4.setBounds(16, 552, 315, 15);
 				}
 				{
-					//jLabel_logo = new JLabel();
-					//jPanel_mainwindow.add(jLabel_logo);
-					//jLabel_logo.setIcon(new ImageIcon(getClass().getClassLoader().getResource("UserInterface/logo.jpg")));
-					//jLabel_logo.setBounds(279, -4, 80, 106);
+					jLabel_logo = new JLabel();
+					jPanel_mainwindow.add(jLabel_logo);
+					jLabel_logo.setIcon(new ImageIcon(getClass().getClassLoader().getResource("UserInterface/logo.jpg")));
+					jLabel_logo.setBounds(279, -4, 80, 106);
 				}
 			}
 			pack();
