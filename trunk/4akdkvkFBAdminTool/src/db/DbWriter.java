@@ -252,7 +252,7 @@ public class DbWriter
 
 
 	/**
-	 * 
+	 * Diese Methode speichert alle Fragen die zu einem Fragebogen gehören.
 	 * @param startFId(int) Anfang-ID der Frage
 	 * @param endFId(int) End-ID der Frage
 	 * @param fbId(int) Fragebogen-ID. Alle Fragen werden diesem Fragebogen zugeordnet.
