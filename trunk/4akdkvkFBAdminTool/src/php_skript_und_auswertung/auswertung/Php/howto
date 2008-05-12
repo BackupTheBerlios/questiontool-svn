@@ -1,0 +1,5 @@
+Die Konfiguationsdatei muss angepasst werden.
+
+Die Startdatei ist die Datei ausw.php.
+über eine Schleife werden die Bilder gerendert.
+Dabei werden die Dateien balken und diag verwendet. Als Rückgabewert liefern sie ein Bild, welches per img Tag eingefügt wird.
