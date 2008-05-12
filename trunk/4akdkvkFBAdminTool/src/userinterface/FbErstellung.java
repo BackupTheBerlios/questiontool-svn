@@ -3,6 +3,12 @@ package userinterface;
 import java.util.Date;
 import fragen.*;
 
+/**
+ * FÜR WAS GIBTS DIESE KLASSE ??? KOPIERTS EUCH MAL ALLES LOKAL RUNTER UND DANN LÖSCHT DIESE KLASSE. WETTEN ES GEHT ALLES ? ;)
+ * sorry #@&% Caps lock =)
+ * @author Sparky
+ *
+ */
 public class FbErstellung
 {	
 	private static Fragebogen frageBogen;
