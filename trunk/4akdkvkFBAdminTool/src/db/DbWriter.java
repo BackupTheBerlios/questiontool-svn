@@ -21,9 +21,7 @@ public class DbWriter
 
 	/**
 	 * 
-	 * Der Datenbankname ist noch nicht bekannt, muss noch eingefügt werden
-	 * Stellt verbindung her
-	 * 
+	 * @return liefert true wenn Verbinung zu Datenbank erfolgreich war. Anderfalls false.
 	 */
 	private static boolean verbinden()
 	{
@@ -50,8 +48,9 @@ public class DbWriter
 
 
 	/**
-	 * Schließt verbindung
-	 */ 
+	 * 
+	 * @return liefert true wenn Verbindung zu Datenbank erfolgreich getrennt wurde. Anderfalls false.
+	 */
 	private static boolean trennen()
 	{
 		try
@@ -68,13 +67,10 @@ public class DbWriter
 	}
 
 
-	/**
-	 * ABLAUF zuerst fbid merken dann fragen speichern tabelle: Fragen
-	 * *****fid´s merken mit linzi klären ob Autowert oder nicht alle Antworten
-	 * die zur frage passen speichern Tabelle: Antwortenvorgebene speichern in
-	 * Tabelle: haben(alle Fragen plus F-ID) Dann Fragebogen in
-	 * Fragebogentabelle speichern
-	 */
+/**
+ * 
+ * @return liefert die höchste Fragebogen-ID. Wenn Abfrage fehlgeschlagen wird -1 zurück gegeben.
+ */
 	public static int getMaxFbID()
 	{
 		verbinden();
@@ -97,7 +93,10 @@ public class DbWriter
 			}
 	}
 
-
+	/**
+	 * 
+	 * @return liefert die höchste Fragen-ID. Wenn Abfrage fehlgeschlagen wird -1 zurück gegeben.
+	 */
 	public static int getMaxFID()
 	{
 		verbinden();
@@ -122,7 +121,11 @@ public class DbWriter
 	}
 
 
-	// 2 in Fragen und danach in haben
+	/**
+	 * 
+	 * @param frage(String) Fragentext
+	 * @return liefert true wenn Fragen erfolgreich in die Datenbank geschrieben wurde. Annderfalls liefert die Methode false.
+	 */
 	public static boolean speichereFrage(String frage)
 	{
 		verbinden();
@@ -155,7 +158,12 @@ public class DbWriter
 	}
 
 
-	// 3 in Antwortvorgegeben
+	/**
+	 * 
+	 * @param antwort(String) Antworttext
+	 * @param typId(int) Gibt den Typ der Frage an, der der Antwort zugeordnet ist
+	 * @return
+	 */
 	public static boolean speichereAntwort(String antwort, int typId)
 	{
 		// Es wird zuerst die ID der MAX Frage ermittelt
@@ -196,7 +204,13 @@ public class DbWriter
 			}
 		return false;
 	}
-
+/**
+ * 
+ * @param titel(String) Titel des Fragebongens
+ * @param beschreibung(String) Beschreibung des Fragebogens
+ * @param enddatum(java.util.Date) Datum bis wann der Fragebogen gültig ist
+ * @return liefert true wenn Fragebongen erfolgreich gespeichert wurde. Anderfall false.
+ */
 	public static boolean speichereFragebogen(String titel,
 			String beschreibung, java.util.Date enddatum)
 	{
@@ -237,7 +251,13 @@ public class DbWriter
 	}
 
 
-	// 4
+	/**
+	 * 
+	 * @param startFId(int) Anfang-ID der Frage
+	 * @param endFId(int) End-ID der Frage
+	 * @param fbId(int) Fragebogen-ID. Alle Fragen werden diesem Fragebogen zugeordnet.
+	 * @return
+	 */
 	public static boolean speichereInHaben(int startFId, int endFId, int fbId)
 	{
 		System.out.println("FBid: " +fbId);
