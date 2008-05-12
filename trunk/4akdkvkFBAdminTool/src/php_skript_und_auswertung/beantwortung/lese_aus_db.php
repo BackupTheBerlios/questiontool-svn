@@ -4,9 +4,16 @@ include "config.php";
 //Wenn kein TAN über GET Übergeben worden ist, dann soll ein Formular angezeigt werden, wo der User einen TAN eingeben kann.
 if (!isset ($_GET['TAN'])) {       
 	echo "<form name=\"Fragebogen\" method=\"GET\" action=\"lese_aus_db.php \">";
-	echo "TAN: <input type=\"text\" name=\"TAN\" maxlength=\"16\" size=\"5\" >";
-	echo "<input type=\"submit\" value=\"abschicken\">";
+	echo "<table>";
+	echo "<tr><td><img src=\"logo.GIF\"></td>";
+	
+	echo "<td><strong><h1>Fragebogen ausfüllen</h1></strong></td></tr>";
+	
+	echo "<tr><td></td><td>Bitte geben Sie Ihren Tan ein: <input type=\"text\" name=\"TAN\" maxlength=\"16\" size=\"16\" ><td></tr>";
+	echo "<tr><td></td><td><input type=\"submit\" value=\"abschicken\"></td></tr>";
 	echo "</form>";
+	echo "</table>";
+	
 }
 
 //Es wurde ein TAN übergeben
