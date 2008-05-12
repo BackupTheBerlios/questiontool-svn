@@ -1,6 +1,7 @@
 package db;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -286,6 +287,32 @@ public class DbWriter
 						e.printStackTrace();
 						return false;
 
+					}
+			}
+		trennen();
+		return true;
+	}
+	
+	public static boolean speichereTans(ArrayList<String> tans, int fbId)
+	{
+		verbinden();
+		for(String tanId : tans)
+			{
+				try
+					{
+						PreparedStatement pstmnt = con.prepareStatement("INSERT INTO dbo_TAN (T_ID, FB_ID, T_istgueltig) VALUES (?,?,?)");
+						pstmnt.setString(1, tanId);
+						pstmnt.setInt(2, fbId);
+						pstmnt.setString(3, "j");
+						pstmnt.executeUpdate();
+						pstmnt.close();
+					}
+				catch ( SQLException e )
+					{
+						// TODO Auto-generated catch block
+						trennen();
+						e.printStackTrace();
+						return false;
 					}
 			}
 		trennen();

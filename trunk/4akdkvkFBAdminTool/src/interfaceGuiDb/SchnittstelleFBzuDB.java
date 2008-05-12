@@ -13,7 +13,7 @@ import db.DbWriter;
 
 public class SchnittstelleFBzuDB
 {
-	public static boolean speicherFb()
+	public static void speicherFb()
 	{
 		Fragebogen fb = Fragebogen.getInstance();
 		boolean erg = DbWriter.speichereFragebogen(fb.getTitel(), fb.getBeschreibung(), fb.getEnddatum());
@@ -35,10 +35,9 @@ public class SchnittstelleFBzuDB
 				int endFId = DbWriter.getMaxFID();
 				
 				DbWriter.speichereInHaben(startFId, endFId, fbId);
+				DbWriter.speichereTans(fb.getTans(), fbId);
 			}
-		
-		
-		return true;
+
 	}
 	
 	public static void main(String[] args)
@@ -66,6 +65,14 @@ public class SchnittstelleFBzuDB
 		fb.addFrage(ft);
 		fb.addFrage(fr);
 		
+		ArrayList<String> tans = new ArrayList();
+		tans.add("0000002");
+		tans.add("0000001");
+		tans.add("0000003");
+		tans.add("0000004");
+		tans.add("0000005");
+		
+		fb.setTans(tans);
         speicherFb();
 		
 		
