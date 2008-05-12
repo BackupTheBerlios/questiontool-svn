@@ -1,5 +1,7 @@
 package userinterface;
 
+import interfaceGuiDb.SchnittstelleFBzuDB;
+
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -291,6 +293,7 @@ public class FbErstellungGUI extends javax.swing.JFrame {
 					    	            	//System.out.println("Tan:"+erste5Stellen+nächste4Stellen+tag+monat+jahreszahl+letzte2stellen);
 					    	            }
 					    	            Fragebogen.getInstance().setTans( tans );
+					    	            SchnittstelleFBzuDB.speicherFb();
 					    	            JOptionPane.showMessageDialog(jPanel_mainwindow,
 		  			                              "Fragebogen wurde erfolgreich erstellt. Sie können nun Fragen zuordnen",
 		  			                              "Erfolg",
@@ -316,7 +319,7 @@ public class FbErstellungGUI extends javax.swing.JFrame {
 					    			  meldung+=" -EndDatum";					    		  
 					    		  if(jTextField_Anzahl.getText().toString().equals(""))
 					    			  meldung+=" -Anzahl der Teilnehmer";					    						    		  
-					    		  System.out.println("hehehe");
+					    		  //System.out.println("hehehe");
 					    		  JOptionPane.showMessageDialog(jPanel_mainwindow,
 					  			                              "Bitte füllen Sie alle Felder aus!\n" +
 					  			                              "Sie haben folgende Felder nicht ausgefüllt: \n"+meldung,
