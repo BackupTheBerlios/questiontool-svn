@@ -227,7 +227,6 @@ public class DbWriter
 				java.sql.Date formatedDate = new java.sql.Date(enddatum.getTime());
 				pstmnt.setDate(3, formatedDate);
 
-
 				int erg = pstmnt.executeUpdate();
 
 				trennen();
@@ -248,7 +247,6 @@ public class DbWriter
 				trennen();
 				return false;
 			}
-
 	}
 
 
@@ -278,15 +276,13 @@ public class DbWriter
 						pstmnt.setInt(2, fbId);
 						pstmnt.setInt(3, sortierung);
 						pstmnt.executeUpdate();
-						pstmnt.close();
-				
+						pstmnt.close();				
 					}
 				catch ( SQLException e )
 					{
 						trennen();
 						e.printStackTrace();
 						return false;
-
 					}
 			}
 		trennen();
@@ -318,5 +314,4 @@ public class DbWriter
 		trennen();
 		return true;
 	}
-
 }
