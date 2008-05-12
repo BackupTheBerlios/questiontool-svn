@@ -3,6 +3,9 @@ package userinterface;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -22,11 +25,11 @@ public class FbNotenFrage extends javax.swing.JFrame {
     private static final long serialVersionUID = 1L;
 	private JPanel jPanel_mainpanel;
 	private JTextPane jTextPane_Beschreibung_Beschreibung;
-	private JTextPane jTextPane_Frageeingabe;
+	public JTextPane jTextPane_Frageeingabe;
 	private JButton jButton_Frageerstellen;
 	private JScrollPane jScrollPane_Frageeingabe;
 	private JLabel jLabel_Frage;
-	private String frage;
+	public String frage;
 
 
 	{
@@ -59,6 +62,16 @@ public class FbNotenFrage extends javax.swing.JFrame {
 	}
 	
 	private void initGUI() {
+		WindowListener windowListener;
+		windowListener = new WindowAdapter(){
+
+			@Override
+			public void windowClosing(WindowEvent arg0) 
+			{
+				FbHinzufuegen.gibGUI().button1.setEnabled(true);
+				super.windowClosing(arg0);
+			}};
+		this.addWindowListener(windowListener);
 		try {
 			setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 			{
@@ -104,6 +117,24 @@ public class FbNotenFrage extends javax.swing.JFrame {
 					      public void actionPerformed(ActionEvent arg0) {
 					    	  if(!jTextPane_Frageeingabe.getText().isEmpty()){
 					    		  frage=jTextPane_Frageeingabe.getText();
+					    		  if(frage!=null)
+						    	  {
+						    		  setAlwaysOnTop(false);
+						    		  boolean vorhanden = FbHinzufuegen.gibGUI().hinzufuegenInTable(frage, null);
+						    		  if(vorhanden==false)
+						    		  {
+						    			  FbHinzufuegen.gibGUI().button1.setEnabled(true);
+						    			  dispose();
+						    		  }
+						    		  setAlwaysOnTop(true);
+						    	  }
+						    	  else
+						    	  {
+						    		  JOptionPane.showMessageDialog(jPanel_mainpanel, 
+						    					"Bitte fügen Sie eine Frage ein!",
+						    					"Achtung", 
+						    			JOptionPane.INFORMATION_MESSAGE);
+						    	  }
 					    	  }
 					    	  else{
 					    		  JOptionPane.showMessageDialog(jPanel_mainpanel,

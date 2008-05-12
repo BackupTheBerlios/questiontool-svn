@@ -2,7 +2,12 @@ package userinterface;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;import javax.swing.ComboBoxModel;
+import java.awt.event.ActionListener;import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.util.ArrayList;
+
+import javax.swing.ComboBoxModel;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -34,7 +39,7 @@ public class FbDropDownFrage extends javax.swing.JFrame {
 	private JLabel jLabel_Vorschau;
 	private JLabel jLabel_Frage_erstellen;
 	private JTextPane jTextPane_Frageeingabe;
-	private JTextPane jTextPane_FrageVorschau;
+	public JTextPane jTextPane_FrageVorschau;
 	private JButton jButton_AntwortLöschen;
 	private JButton jButton_FrageLöschen;
 	private JLabel jLabel_meldung;
@@ -48,9 +53,10 @@ public class FbDropDownFrage extends javax.swing.JFrame {
 	private JLabel jLabel_FrageundAntwortenErstellen;
 	private JPanel jPanel_FrageErstellen;
 	private JTextPane jTextPane_Beschreibung_Beschreibung;
-	private JComboBox jComboBox_vorschau;
+	public JComboBox jComboBox_vorschau;
 	private JPanel jPanel_vorschau;
-	private String frage;
+	public String frage;
+	public ArrayList<String> antworten = new ArrayList<String>();
 
 
 	/**
@@ -73,6 +79,16 @@ public class FbDropDownFrage extends javax.swing.JFrame {
 	}
 	
 	private void initGUI() {
+		WindowListener windowListener;
+		windowListener = new WindowAdapter(){
+
+			@Override
+			public void windowClosing(WindowEvent arg0) 
+			{
+				FbHinzufuegen.gibGUI().button1.setEnabled(true);
+				super.windowClosing(arg0);
+			}};
+		this.addWindowListener(windowListener);
 		try {
 			setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 			{
@@ -115,7 +131,26 @@ public class FbDropDownFrage extends javax.swing.JFrame {
 						jButton_FrageinklAntwortenErstellen.setText("Frage inkl. Antworten Erstellen");
 						jButton_FrageinklAntwortenErstellen.setBounds(156, 107, 228, 22);
 						jButton_FrageinklAntwortenErstellen.addActionListener(new ActionListener(){
-						      public void actionPerformed(ActionEvent arg0) {
+						      public void actionPerformed(ActionEvent arg0) 
+						      {
+						    	  if(frage!=null&&antworten!=null)
+						    	  {
+						    		  setAlwaysOnTop(false);
+						    		  boolean vorhanden = FbHinzufuegen.gibGUI().hinzufuegenInTable(frage, antworten);
+						    		  if(vorhanden==false)
+						    		  {
+						    			  FbHinzufuegen.gibGUI().button1.setEnabled(true);
+						    			  dispose();
+						    		  }
+						    		  setAlwaysOnTop(true);
+						    	  }
+						    	  else
+						    	  {
+						    		  JOptionPane.showMessageDialog(jPanel_mainpanel, 
+						    					"Bitte fügen Sie eine Frage und Antworten ein!",
+						    					"Achtung", 
+						    			JOptionPane.INFORMATION_MESSAGE);
+						    	  }
 						      }
 						});
 					}
@@ -151,6 +186,7 @@ public class FbDropDownFrage extends javax.swing.JFrame {
 						    	  if(jComboBox_vorschau.getSelectedItem()!=null){
 							    	  if(!jComboBox_vorschau.getSelectedItem().toString().isEmpty()){
 							    		  jComboBox_vorschau.removeItem( jComboBox_vorschau.getSelectedItem().toString());
+							    		  antworten.remove(jComboBox_vorschau.getSelectedItem().toString());
 							    	  }
 						    	  }
 						    	  else{
@@ -241,6 +277,7 @@ public class FbDropDownFrage extends javax.swing.JFrame {
 						      public void actionPerformed(ActionEvent arg0) {
 						    	  if(!jTextField_AntwortEingabe.getText().isEmpty()){
 						    		  jComboBox_vorschau.addItem(jTextField_AntwortEingabe.getText());
+						    		  antworten.add(jTextField_AntwortEingabe.getText());
 						    		  jLabel_meldung.setText( "Antwort erfolgreich hinzugefügt" );
 						    		  jTextField_AntwortEingabe.setText( "" );
 						    	  }

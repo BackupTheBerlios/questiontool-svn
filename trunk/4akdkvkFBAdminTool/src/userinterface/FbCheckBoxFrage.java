@@ -3,6 +3,9 @@ package userinterface;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +32,7 @@ public class FbCheckBoxFrage extends javax.swing.JFrame {
 	private JLabel jLabel_Vorschau;
 	private JScrollPane jScrollPane1;
 	private JTextPane jTextPane_Frageeingabe;
-	private JTextPane jTextPane_FrageVorschau;
+	public JTextPane jTextPane_FrageVorschau;
 	private JButton jButton_FrageinklAntwortenErstellen;
 	private JButton jButton_CheckBoxButtonLoeschen;
 	private JPanel jPanel1;
@@ -46,10 +49,10 @@ public class FbCheckBoxFrage extends javax.swing.JFrame {
 	private JScrollPane jScrollPane_Fragevorschau;
 	private JPanel jPanel_vorschau;
 	private JTextPane jTextPane_Beschreibung_Beschreibung;
-	private ArrayList<String> antworten;
-	private String frage;
+	public ArrayList<String> antworten;
+	public String frage;
 	private  ButtonGroup buttongroup;
-	private List<JCheckBox> checkboxes;
+	public List<JCheckBox> checkboxes;
 
 	{
 		//Set Look & Feel
@@ -84,10 +87,29 @@ public class FbCheckBoxFrage extends javax.swing.JFrame {
 	}
 	
 	private void initGUI() {
+		WindowListener windowListener;
+		windowListener = new WindowAdapter(){
+
+			@Override
+			public void windowClosing(WindowEvent arg0) 
+			{
+				try
+				{
+					FbHinzufuegen.gibGUI().button1.setEnabled(true);
+				}
+				catch(NullPointerException e)
+				{
+					
+				}
+				
+				super.windowClosing(arg0);
+			}};
+		this.addWindowListener(windowListener);
 		try {
 			setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 			{
 				jPanel_mainpanel = new JPanel();
+				setAlwaysOnTop(true);
 				getContentPane().add(jPanel_mainpanel, BorderLayout.CENTER);
 				jPanel_mainpanel.setLayout(null);
 				jPanel_mainpanel.setPreferredSize(new java.awt.Dimension(452, 485));
@@ -217,7 +239,26 @@ public class FbCheckBoxFrage extends javax.swing.JFrame {
 						jButton_FrageinklAntwortenErstellen.setText("Fragen inkl. Antworten erstellen");
 						jButton_FrageinklAntwortenErstellen.setBounds(231, 182, 188, 21);
 						jButton_FrageinklAntwortenErstellen.addActionListener(new ActionListener(){
-						      public void actionPerformed(ActionEvent arg0) {
+						      public void actionPerformed(ActionEvent arg0) 
+						      {
+						    	  if(frage!=null&&antworten!=null)
+						    	  {
+						    		  setAlwaysOnTop(false);
+						    		  boolean vorhanden = FbHinzufuegen.gibGUI().hinzufuegenInTable(frage, antworten);
+						    		  if(vorhanden==false)
+						    		  {
+						    			  FbHinzufuegen.gibGUI().button1.setEnabled(true);
+						    			  dispose();
+						    		  }
+						    		  setAlwaysOnTop(true);
+						    	  }
+						    	  else
+						    	  {
+						    		  JOptionPane.showMessageDialog(jPanel_mainpanel, 
+						    					"Bitte fügen Sie eine Frage und Antworten ein!",
+						    					"Achtung", 
+						    			JOptionPane.INFORMATION_MESSAGE);
+						    	  }
 						      }
 						});
 					}
@@ -314,7 +355,7 @@ public class FbCheckBoxFrage extends javax.swing.JFrame {
 										jPanel1.setLayout(null);
 						    		  //buttons = new ArrayList< JRadioButton >();
 						    		  //int y=69;//immer +25
-						    		  int y=9;
+						    		  /*int y=9;
 						    		  int i=0;
 						    		  for(String s : antworten){
 						    			  JCheckBox b= new JCheckBox(s);
@@ -328,8 +369,8 @@ public class FbCheckBoxFrage extends javax.swing.JFrame {
 						    			  buttongroup.add( b );
 						    			  
 						    			  i++;
-						    		  }
-						    		  
+						    		  }*/
+						    		  checkboxenEinfügen(antworten);
 						    
 						    		  jLabel_meldung.setText( "Antwort erfolgreich hinzugefügt" );
 						    		  jTextField_AntwortHinzufuegen.setText( "" );
@@ -362,6 +403,25 @@ public class FbCheckBoxFrage extends javax.swing.JFrame {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void checkboxenEinfügen(ArrayList<String> array)
+	{
+		 int y=9;
+		  int i=0;
+		  for(String s : antworten){
+			  JCheckBox b= new JCheckBox(s);
+			  //jPanel1.add( b );
+			  jPanel1.add( b );
+			  b.setActionCommand(""+i);
+			  b.setBounds( 11, y, 93, 23 );
+			  y+=25;
+			  checkboxes.add( b );
+			  
+			  buttongroup.add( b );
+			  
+			  i++;
+		  }
 	}
 
 }

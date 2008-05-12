@@ -3,6 +3,9 @@ package userinterface;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,10 +31,10 @@ public class FbRadioFrage extends javax.swing.JFrame {
 	private JLabel jLabel_Vorschau;
 	private JScrollPane jScrollPane1;
 	private JTextPane jTextPane_Frageeingabe;
-	private JTextPane jTextPane_FrageVorschau;
+	public JTextPane jTextPane_FrageVorschau;
 	private JButton jButton_FrageinklAntwortenErstellen;
 	private JButton jButton_RadioButtonLoeschen;
-	private JPanel jPanel1;
+	public JPanel jPanel1;
 	private JLabel jLabel_meldung;
 	private JButton jButton_AntwortHinzufuegen;
 	private JTextField jTextField_AntwortHinzufuegen;
@@ -45,10 +48,10 @@ public class FbRadioFrage extends javax.swing.JFrame {
 	private JScrollPane jScrollPane_Fragevorschau;
 	private JPanel jPanel_vorschau;
 	private JTextPane jTextPane_Beschreibung_Beschreibung;
-	private ArrayList<String> antworten;
-	private ButtonGroup buttongroup;
-	private List<JRadioButton> buttons;
-	private String frage;
+	public ArrayList<String> antworten;
+	public ButtonGroup buttongroup;
+	public List<JRadioButton> buttons;
+	public String frage;
 
 
 	{
@@ -84,6 +87,16 @@ public class FbRadioFrage extends javax.swing.JFrame {
 	}
 	
 	private void initGUI() {
+		WindowListener windowListener;
+		windowListener = new WindowAdapter(){
+
+			@Override
+			public void windowClosing(WindowEvent arg0) 
+			{
+				FbHinzufuegen.gibGUI().button1.setEnabled(true);
+				super.windowClosing(arg0);
+			}};
+		this.addWindowListener(windowListener);
 		try {
 			setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 			{
@@ -217,7 +230,26 @@ public class FbRadioFrage extends javax.swing.JFrame {
 						jButton_FrageinklAntwortenErstellen.setText("Fragen inkl. Antworten erstellen");
 						jButton_FrageinklAntwortenErstellen.setBounds(231, 182, 188, 21);
 						jButton_FrageinklAntwortenErstellen.addActionListener(new ActionListener(){
-						      public void actionPerformed(ActionEvent arg0) {
+						      public void actionPerformed(ActionEvent arg0) 
+						      {
+						    	  if(frage!=null&&antworten!=null)
+						    	  {
+						    		  setAlwaysOnTop(false);
+						    		  boolean vorhanden = FbHinzufuegen.gibGUI().hinzufuegenInTable(frage, antworten);
+						    		  if(vorhanden==false)
+						    		  {
+						    			  FbHinzufuegen.gibGUI().button1.setEnabled(true);
+						    			  dispose();
+						    		  }
+						    		  setAlwaysOnTop(true);
+						    	  }
+						    	  else
+						    	  {
+						    		  JOptionPane.showMessageDialog(jPanel_mainpanel, 
+						    					"Bitte fügen Sie eine Frage und Antworten ein!",
+						    					"Achtung", 
+						    			JOptionPane.INFORMATION_MESSAGE);
+						    	  }
 						      }
 						});
 					}
