@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 import javax.swing.BorderFactory;
@@ -203,7 +204,8 @@ public class FbErstellungGUI extends javax.swing.JFrame {
 					    	  
 					    	  if(  !jTextField_fbTitel.getText().toString().equals("")
 					    	     &&!jTextArea_fbBeschreibung.getText().toString().equals("")
-					    	     &&!jTextField_fbEndDatum.getText().toString().equals("")){
+					    	     &&!jTextField_fbEndDatum.getText().toString().equals("")
+					    	     &&!jTextField_Anzahl.getText().toString().equals( "" )){
 					    		  
 					    		  
 					    		  //int date  = 1; 
@@ -242,9 +244,9 @@ public class FbErstellungGUI extends javax.swing.JFrame {
 					    	            
 					    	            
 					    	            Fragebogen.getInstance().setEnddatum(dt);
-					    	            DbWriter.speichereFragebogen(Fragebogen.getInstance().getTitel(), 
-					    	            		Fragebogen.getInstance().getBeschreibung(),
-					    	            		Fragebogen.getInstance().getEnddatum());
+					    	           // DbWriter.speichereFragebogen(Fragebogen.getInstance().getTitel(), 
+					    	            //		Fragebogen.getInstance().getBeschreibung(),
+					    	            	//	Fragebogen.getInstance().getEnddatum());
 					    	            
 					    	            ArrayList<String> tans = new ArrayList<String>();
 					    	            /*TAN: Xxxxx xxxx xx xx xx xx
@@ -258,6 +260,7 @@ public class FbErstellungGUI extends javax.swing.JFrame {
 					    	            */
 					    	            
 					    	            String id = ""+Fragebogen.getInstance().getId();
+					    	            
 					    	            int anzahl = Integer.valueOf(jTextField_Anzahl.getText());
 					    	            String tag;
 					    	            if(day<10)
@@ -320,10 +323,13 @@ public class FbErstellungGUI extends javax.swing.JFrame {
 					    	        }
 					    	        catch (Exception e) {
 					    	        	JOptionPane.showMessageDialog(jPanel_mainwindow,
-							  			                              "Datum existiert nicht, vergewissern Sie sich ob es ein richtiges Datum ist",
+							  			                              "Datum existiert nicht, vergewissern Sie sich ob es ein richtiges Datum ist, bzw. haben Sie keine korrekte Anzahl der Teilnehmer angegeben",
 							  			                              "Error",
 							  			                              JOptionPane.ERROR_MESSAGE) ;
+							  			                              
+					    	        	e.printStackTrace() ;
 					    	        }
+					    	    
 					    		  
 					    	  }
 					    	  else{
@@ -338,6 +344,9 @@ public class FbErstellungGUI extends javax.swing.JFrame {
 					    		  
 					    		  if(jTextField_fbEndDatum.getText().toString().equals(""))
 					    			  meldung+=" -EndDatum";
+					    		  
+					    		  if(jTextField_Anzahl.getText().toString().equals(""))
+					    			  meldung+=" -Anzahl der Teilnehmer";
 					    		  
 					    		  
 					    		  System.out.println("hehehe");
