@@ -201,7 +201,7 @@ public class FbErstellungGUI extends javax.swing.JFrame {
 					    		  
 					    		  try {
 					    			  String[] datum = jTextField_fbEndDatum.getText().toString().split("\\p{Punct}");
-							    		System.out.println(jTextField_fbEndDatum.getText().toString());
+							    		//System.out.println(jTextField_fbEndDatum.getText().toString());
 							    		 
 							    		int day = Integer.valueOf(datum[0]);
 							    		int month = Integer.valueOf(datum[1]);
@@ -224,8 +224,7 @@ public class FbErstellungGUI extends javax.swing.JFrame {
 					    	            
 					    	            SimpleDateFormat sdf = new SimpleDateFormat( "dd.mm.yyyy" );
 					    	            Date dt = (Date) sdf.parse( datezumabspeichern );
-					    	            System.out.println(dt);
-					    	            
+					    	            //System.out.println(dt);					    	            
 					    	            
 					    	            Fragebogen.getInstance().setEnddatum(dt);
 					    	            DbWriter.speichereFragebogen(Fragebogen.getInstance().getTitel(), 
@@ -243,7 +242,8 @@ public class FbErstellungGUI extends javax.swing.JFrame {
 					    	            * letzten beiden Stellen -> Als reserve, sollen standardm‰ﬂig mit 00 
 					    	            */
 					    	            
-					    	            String id = ""+Fragebogen.getInstance().getId();				    	            
+					    	            String id = ""+Fragebogen.getInstance().getId();
+					    	            System.out.println(id);
 					    	            int anzahl = Integer.valueOf(jTextField_Anzahl.getText());
 					    	            String tag;
 					    	            if(day<10)
@@ -319,7 +319,6 @@ public class FbErstellungGUI extends javax.swing.JFrame {
 					    	  }		    	  
 					      }
 					});
-
 				}
 				{
 					jTextPane_Beschreibung_Erstellen = new JTextPane();

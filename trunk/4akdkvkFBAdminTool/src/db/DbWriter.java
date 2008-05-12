@@ -197,27 +197,21 @@ public class DbWriter
 		return false;
 	}
 
-
-	@SuppressWarnings("deprecation")
 	public static boolean speichereFragebogen(String titel,
-			String beschreibung, Date enddatum)
+			String beschreibung, java.util.Date enddatum)
 	{
 		verbinden();
 		try
 			{
-				int month = enddatum.getMonth();
-				month++;
-				enddatum.setMonth(month);
 				PreparedStatement pstmnt = con
 						.prepareStatement("INSERT INTO dbo_Fragebogen (FB_Beschreibung, FB_Titel, FB_ausfuellen_bis) "
 								+ "VALUES (?,?,?)");
-				//Datumsproblem lösen
-				Calendar stCal = Calendar.getInstance();
-				java.sql.Date sqlendDate = new java.sql.Date(stCal.getTimeInMillis());
-				//Statemnet aufbauen
 				pstmnt.setString(1, beschreibung);
 				pstmnt.setString(2, titel);
-				pstmnt.setDate(3, sqlendDate);
+				//Hier erfolgt die Umwandlung in ein für die Datenbank passendes Datums format(von util.Date zu sql.Date)
+				java.sql.Date formatedDate = new java.sql.Date(enddatum.getTime());
+				pstmnt.setDate(3, formatedDate);
+
 
 				int erg = pstmnt.executeUpdate();
 
@@ -239,6 +233,7 @@ public class DbWriter
 				trennen();
 				return false;
 			}
+
 	}
 
 

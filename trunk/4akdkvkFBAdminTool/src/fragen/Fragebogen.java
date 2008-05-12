@@ -14,9 +14,7 @@ public class Fragebogen
 	private int anzahl;
 	private ArrayList<String> tans;
 	private int id;
-
-
-	 
+ 
 	 public Fragebogen()
 	 {
 		 fragenList = new ArrayList<Frage>();

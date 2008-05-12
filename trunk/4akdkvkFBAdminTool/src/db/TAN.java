@@ -37,8 +37,7 @@ public class TAN {
 	 */
 	public static ArrayList<String> getTANS (int fbId, int anzahlbefragte, String spezialTan)
 	{
-		ArrayList<String> ergebnis = new ArrayList<String> ();
-		
+		ArrayList<String> ergebnis = new ArrayList<String> ();		
 		for (int i = 0; i < anzahlbefragte; i++)
 		{
 			String a = "";
