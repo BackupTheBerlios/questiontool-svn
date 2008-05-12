@@ -1,0 +1,46 @@
+form { padding:5px; border:10px solid #ddd; }
+td, input, select, textarea { font-size:13px; font-family:Verdana,sans-serif; font-weight:bold; }
+input, select, textarea { color:#00c; }
+.Bereich, .Feld { background-color:#ffa;  border:10px solid #ddd; }
+.Auswahl { background-color:#dff; width:400px; border:6px solid #ddd; }
+.Check, .Radio { background-color:#ddff; border:1px solid #ddd; }
+.Button { background-color:#aaa; color:#fff; width:200px; border:6px solid #ddd; }
+.question {font-family:Arial, Helvetica, sans-serif;font-size:14px;font-weight:bold;background-color:#99CCFF;}
+.response {font-size:12px;color:#000000;background-color:#E2E2E2;font-family:Arial, Helvetica, sans-serif;}
+
+
+body
+{
+	font: normal 95.01% helvetica, verdana, arial, sans-serif;
+	color:#333;
+	background: #fff;
+	margin: 0 2em;
+	padding: 1em;
+}
+
+a
+{
+	color: #00c;
+	background: #fff;
+}
+
+a:hover, a:focus, a:active
+{
+	color: #00c;
+	background: #fc0;
+}
+
+input#thumb
+{
+	position: absolute;
+	left: 11px;
+	top: 5px;
+	padding: 5px 0;
+}
+
+input#thumb:focus
+{
+	outline: none;
+	border: none;
+}
+

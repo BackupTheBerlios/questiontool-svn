@@ -11,6 +11,23 @@ while ($verbindung == false) {
 mssql_select_db(MSSQL_DATABASE) OR die("Die Datenbank konnte nicht ausgewählt werden");
 
 $TAN = $_POST['TAN'];
+
+//überprüfung, damit der User keinen Refresh machen kann.
+$sql = "SELECT * from tan where T_ID = " . $_GET['TAN'];
+	$result = mssql_query($sql) OR die("Es gab Probleme beim SQL-Befehl");
+	if (mssql_num_rows($result) == 0) {
+		//es wurde eine ungültige ID eingegeben und das Skript wird beendet
+		die("Sie sind leider nicht berechtigt den Fragebogen auszuwählen<br /><a href=\"lese_aus_db.php\">Probieren Sie es erneuert</a>");
+	} else {
+		while ($row = mssql_fetch_assoc($result)) {
+			$fbid = $row['FB_ID'];
+			if ($row['T_istgueltig'] == 'n') {
+				//Falls der TAN schon ausgefüllt ist, wird das Skript beendet
+				die("Sie haben den Fragebogen bereits ausgefühlt.<br /> <a href=\"lese_aus_db.php\">Probieren Sie einen anderen TAN</a>");
+			}
+
+
+
 echo "Folgende Daten wurden übermittelt:";
 echo "<table>";
 

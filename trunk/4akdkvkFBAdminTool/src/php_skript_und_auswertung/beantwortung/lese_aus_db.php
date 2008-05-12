@@ -1,5 +1,3 @@
-
-<a href="http://localhost/fragebogen/1/1/ausw.php?FBID=1">Diagrame</a>
 <?php
 include "config.php";
 
@@ -27,10 +25,11 @@ if (!isset ($_GET['TAN'])) {
 <link rel="stylesheet" type="text/css" href="css.css" />  <!-- Ladet die CSS-Datei -->
 </head>
 <body style="margin:0;padding:0">
-<h1 class="title">Prototyp Design - Pre Projekt Meinungsforschung</h1>
+<h1 class="title" align="center">Pre Projekt Meinungsforschung</h1>
 <!-- Hier beginnt das Formular -->    
-<form name="Fragebogen" method="GET" action="schreibe_in_db.php">
-<table cellpadding="8" cellspacing="8" border="0">
+<form name="Fragebogen" method="POST" action="schreibe_in_db.php">
+
+<table  border="0" width="300px" align="center">
 <?php
 
 //der Übergebene TAN ist keine Zahl
@@ -49,43 +48,49 @@ if (!isset ($_GET['TAN'])) {
 				//Falls der TAN schon ausgefüllt ist, wird das Skript beendet
 				die("Sie haben den Fragebogen bereits ausgefühlt.<br /> <a href=\"lese_aus_db.php\">Probieren Sie einen anderen TAN</a>");
 			}
-			$sql = "select * from fragebogen where FB_ausfuellen_bis > GETDATE() AND fbid = $fbid";
+			
+		}
+		$sql = "select * from fragebogen where FB_ausfuellen_bis > GETDATE() AND fb_id = $fbid";
 	$result = mssql_query($sql) OR die("Es gab Probleme beim SQL-Befehl");
 	if (mssql_num_rows($result) == 0) {
 		//Wenn das Datum abgelaufen ist
 		die("Dieser Fragebogen kann leider nicht mehr ausgefüllt werden");
 	}
-		}
+		
+		
+		
+		
+		
 //Es wird die View alleFragen benutzt und die Einschränkung ist der Tan, welcher über GET übertragen wird.
 		$sql = "SELECT * from alleFragen where T_ID=" . $_GET['TAN'];
 		$result = mssql_query($sql) OR die("Es gab Probleme beim SQL-Befehl");
 		$stop = 0;
 		while ($row = mssql_fetch_assoc($result)) {
 			if ($stop == 0) {
-				echo "<h1>" . $row['FB_Titel'] . "<h1>";
+				echo "<tr><h1 align=\"center\">" . $row['FB_Titel'] . "</h1></tr>";
 				$stop++;
 			}
 			$counter = 0;
 			echo "<tr> <td class=\"question\"> ";
 			echo $row['F_Frage'];
 			echo " </td></tr>";
-			echo "<br /> \n";
+			echo "\n";
 			$sql = "SELECT * from antwortentyp where A_F_ID = " . $row['F_ID'];
 			$result2 = mssql_query($sql) OR die("Es gab Probleme beim SQL-Befehl");
 			while ($row2 = mssql_fetch_assoc($result2)) {
 				switch ($row2['T_Typ']) {
 					//Falls der Antworttyp ein Radiobutton ist 
 					case "Radio" :
-						if ($count == 0) {   //wird fürs Layout benötigt
+						if ($counter == 0) {   //wird fürs Layout benötigt
 							echo "<tr><td class=\"response Radio\">";
 						}
 						$counter = $counter +1;
 // Der Radiobutton bekommt den Namen 'Radio' mit der FragenID. Der Wert ist die AntwortID.
-						echo " <input type=\"radio\" name=\"Radio" . $row['F_ID'] . "\"value=" . $row2['A_ID'] . ">" . $row2["A_Antwort"] . "</input>";
-						echo "<br /> \n";
+						echo " <tr><td class=\"response\"><input type=\"radio\" name=\"Radio" . $row['F_ID'] . "\" value=" . $row2['A_ID'] . ">" . $row2["A_Antwort"] . "</input>";
+						echo "</td></tr> \n";
 						//wenn das der letzte Eintrag ist
 						if ($counter == (mssql_num_rows($result2))) {
-							echo "</tr></td>";
+							echo "</tr>";
 						}
 						break 1;
  // Wenn der Antworttyp eine Checkbox ist.
@@ -121,7 +126,7 @@ if (!isset ($_GET['TAN'])) {
 						}
 						$counter = $counter +1;
 //hier wird ein Textarea Teld definiert für größere Texte. Ansprechen lässt sich dieses Feld über 'Areaa' und der AntwortID						
-						echo "<textarea name=\"Areaa" . $row2['A_ID'] . "\"></textarea>";
+						echo "<textarea rows=\"5\" cols=\"50\" name=\"Areaa" . $row2['A_ID'] . "\"></textarea>";
 						echo "<br /> \n";
 						if ($counter == (mssql_num_rows($result2))) {
 							echo "</tr></td>";
@@ -136,7 +141,7 @@ if (!isset ($_GET['TAN'])) {
 						if ($counter == 0) {
 //hier wird das Dropdown Feld geöffnet							
 							echo "<select name=\"Dropd" . $row['F_ID'] . "\"";
-							echo "<br />";
+							//echo "<br />";
 						}
 //hier erhaltet das Dropdown Feld werte
 //Der Wert ist die AntwortID.						
@@ -172,7 +177,9 @@ echo "</table>";
 
 //Die TAN wird versteckt mitgesendet
 echo "<input type=\"hidden\" name=\"TAN\" value=\"" . $_GET['TAN'] . "\"></input>";
-echo "<input type=\"submit\" value=\"abschicken\">";
+echo "<div align=\"center\">";
+echo "<input type=\"submit\" value=\"abschicken\">"; //abschickbotton
+echo "</div>";
 
 }
 ?>
