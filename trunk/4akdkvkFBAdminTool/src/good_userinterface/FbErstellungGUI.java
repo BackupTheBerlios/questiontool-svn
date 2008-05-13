@@ -293,11 +293,14 @@ public class FbErstellungGUI extends javax.swing.JFrame {
 					    	            	//System.out.println("Tan:"+erste5Stellen+nächste4Stellen+tag+monat+jahreszahl+letzte2stellen);
 					    	            }
 					    	            Fragebogen.getInstance().setTans( tans );
-					    	            SchnittstelleFBzuDB.speicherFb();
+					    	            //SchnittstelleFBzuDB.speicherFb();
 					    	            JOptionPane.showMessageDialog(jPanel_mainwindow,
 		  			                              "Fragebogen wurde erfolgreich erstellt. Sie können nun Fragen zuordnen",
 		  			                              "Erfolg",
-		  			                              JOptionPane.INFORMATION_MESSAGE) ;	
+		  			                              JOptionPane.INFORMATION_MESSAGE) ;
+					    	            dispose();
+					    	            @SuppressWarnings("unused")
+										FbHinzufuegenGUI fbhgui= new FbHinzufuegenGUI();
 
 					    	        }
 					    	        catch (Exception e) {
