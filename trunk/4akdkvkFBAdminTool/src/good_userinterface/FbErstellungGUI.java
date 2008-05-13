@@ -1,7 +1,5 @@
 package good_userinterface;
 
-import interfaceGuiDb.SchnittstelleFBzuDB;
-
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,8 +24,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.SwingUtilities;
 
 import db.DbWriter;
-
-import fragen.*;
+import good_fragen.*;
 
 public class FbErstellungGUI extends javax.swing.JFrame {
 

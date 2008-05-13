@@ -78,8 +78,7 @@ public class FbHinzufuegenGUI
 		hauptpanel = new JPanel();
 		
 		//**********Hauptpanel Border, Optik....etc. Einstellungen für hauptpanel
-		hauptfensterEdit(); // hauptfensterEdit() wird hier aufgerufen
-		
+		hauptfensterEdit(); // hauptfensterEdit() wird hier aufgerufen		
 		contentPane.add(hauptpanel);
 		//**********Erstellte Komponente zu Frame hinzufügen*******
 		hauptfenster.setPreferredSize(new Dimension(820,610));
@@ -121,7 +120,8 @@ public class FbHinzufuegenGUI
 		JPanel panelNorthBox = new JPanel();
 		panelNorthBox.setLayout(new BoxLayout(panelNorthBox,BoxLayout.Y_AXIS));
 		if(FbHinzufuegen.gib_Klasse()==null){
-			System.out.print("Klasse null");
+			//System.out.print("Klasse null");
+			//Da sollte exception her ned Konsolen ausgabe
 		}
 		JLabel labelFBAttribut1 = new JLabel("Titel:  "+FbHinzufuegen.gib_Klasse().getTitel());
 		JLabel labelFBAttribut2 = new JLabel("Beschreibung:  "+FbHinzufuegen.gib_Klasse().getBeschreibung());
