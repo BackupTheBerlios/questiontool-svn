@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 import javax.swing.table.AbstractTableModel;
 
-import fragen.Frage;
+import good_fragen.Frage;
 
 
 @SuppressWarnings("serial")

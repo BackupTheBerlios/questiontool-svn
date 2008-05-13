@@ -22,7 +22,7 @@ import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 
-import good_fragen.*;
+import good_fragen.Frage;
 
 /**
  * 
