@@ -23,6 +23,10 @@ import javax.swing.border.LineBorder;
 import javax.swing.SwingUtilities;
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class FbDropDownFrage.
+ */
 @SuppressWarnings("serial")
 public class FbDropDownFrage extends javax.swing.JFrame {
 
@@ -35,33 +39,78 @@ public class FbDropDownFrage extends javax.swing.JFrame {
 		}
 	}
 
+	/** The j panel_mainpanel. */
 	private JPanel jPanel_mainpanel;
+	
+	/** The j label_ vorschau. */
 	private JLabel jLabel_Vorschau;
+	
+	/** The j label_ frage_erstellen. */
 	private JLabel jLabel_Frage_erstellen;
+	
+	/** The j text pane_ frageeingabe. */
 	private JTextPane jTextPane_Frageeingabe;
+	
+	/** The j text pane_ frage vorschau. */
 	public JTextPane jTextPane_FrageVorschau;
+	
+	/** The j button_ antwort löschen. */
 	private JButton jButton_AntwortLöschen;
+	
+	/** The j button_ frage löschen. */
 	private JButton jButton_FrageLöschen;
+	
+	/** The j label_meldung. */
 	private JLabel jLabel_meldung;
+	
+	/** The j button_ frageinkl antworten erstellen. */
 	private JButton jButton_FrageinklAntwortenErstellen;
+	
+	/** The j scroll pane_ fragevorschau. */
 	private JScrollPane jScrollPane_Fragevorschau;
+	
+	/** The j button_ antwort hinzufuegen. */
 	private JButton jButton_AntwortHinzufuegen;
+	
+	/** The j text field_ antwort eingabe. */
 	private JTextField jTextField_AntwortEingabe;
+	
+	/** The j label_ antwort hinzufügen. */
 	private JLabel jLabel_AntwortHinzufügen;
+	
+	/** The j button_ frage hinzufuegen. */
 	private JButton jButton_FrageHinzufuegen;
+	
+	/** The j scroll pane_ frage erstellen. */
 	private JScrollPane jScrollPane_FrageErstellen;
+	
+	/** The j label_ frageund antworten erstellen. */
 	private JLabel jLabel_FrageundAntwortenErstellen;
+	
+	/** The j panel_ frage erstellen. */
 	private JPanel jPanel_FrageErstellen;
+	
+	/** The j text pane_ beschreibung_ beschreibung. */
 	private JTextPane jTextPane_Beschreibung_Beschreibung;
+	
+	/** The j combo box_vorschau. */
 	public JComboBox jComboBox_vorschau;
+	
+	/** The j panel_vorschau. */
 	private JPanel jPanel_vorschau;
+	
+	/** The frage. */
 	public String frage;
+	
+	/** The antworten. */
 	public ArrayList<String> antworten = new ArrayList<String>();
 
 
 	/**
-	* Auto-generated main method to display this JFrame
-	*/
+	 * Auto-generated main method to display this JFrame.
+	 * 
+	 * @param args the args
+	 */
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
@@ -72,12 +121,18 @@ public class FbDropDownFrage extends javax.swing.JFrame {
 		});
 	}
 	
+	/**
+	 * Instantiates a new fb drop down frage.
+	 */
 	public FbDropDownFrage() {
 		super();
 		initGUI();
 		this.setTitle("DropDown Frage");
 	}
 	
+	/**
+	 * Inits the gui.
+	 */
 	private void initGUI() {
 		WindowListener windowListener;
 		windowListener = new WindowAdapter(){

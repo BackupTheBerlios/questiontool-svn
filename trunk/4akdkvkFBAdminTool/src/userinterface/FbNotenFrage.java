@@ -18,17 +18,34 @@ import javax.swing.border.LineBorder;
 import javax.swing.SwingUtilities;
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class FbNotenFrage.
+ */
 public class FbNotenFrage extends javax.swing.JFrame {
-	/**
-     * 
-     */
+	
+	/** The Constant serialVersionUID. */
     private static final long serialVersionUID = 1L;
+	
+	/** The j panel_mainpanel. */
 	private JPanel jPanel_mainpanel;
+	
+	/** The j text pane_ beschreibung_ beschreibung. */
 	private JTextPane jTextPane_Beschreibung_Beschreibung;
+	
+	/** The j text pane_ frageeingabe. */
 	public JTextPane jTextPane_Frageeingabe;
+	
+	/** The j button_ frageerstellen. */
 	private JButton jButton_Frageerstellen;
+	
+	/** The j scroll pane_ frageeingabe. */
 	private JScrollPane jScrollPane_Frageeingabe;
+	
+	/** The j label_ frage. */
 	private JLabel jLabel_Frage;
+	
+	/** The frage. */
 	public String frage;
 
 
@@ -43,8 +60,10 @@ public class FbNotenFrage extends javax.swing.JFrame {
 
 
 	/**
-	* Auto-generated main method to display this JFrame
-	*/
+	 * Auto-generated main method to display this JFrame.
+	 * 
+	 * @param args the args
+	 */
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
@@ -55,12 +74,18 @@ public class FbNotenFrage extends javax.swing.JFrame {
 		});
 	}
 	
+	/**
+	 * Instantiates a new fb noten frage.
+	 */
 	public FbNotenFrage() {
 		super();
 		initGUI();
 		this.setTitle( "Noten Frage" );
 	}
 	
+	/**
+	 * Inits the gui.
+	 */
 	private void initGUI() {
 		WindowListener windowListener;
 		windowListener = new WindowAdapter(){

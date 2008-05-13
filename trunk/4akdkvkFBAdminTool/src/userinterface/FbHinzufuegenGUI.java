@@ -35,22 +35,55 @@ import javax.swing.event.AncestorEvent;
 import javax.swing.event.AncestorListener;
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class FbHinzufuegenGUI.
+ */
 public class FbHinzufuegenGUI 
 {
+	
+	/** The hauptfenster. */
 	JFrame hauptfenster; //JFrame was ich verwende
+	
+	/** The hauptpanel. */
 	JPanel hauptpanel;   //JPanel welches in der ContentPane drinnen ist
+	
+	/** The panel center. */
 	JPanel panelCenter;
+	
+	/** The label fragen eingefuegt. */
 	JLabel labelFragenEingefuegt = null;
+	
+	/** The ausgewaehlt. */
 	String ausgewaehlt = null;
+	
+	/** The hinzugefuegte frage. */
 	Frage hinzugefuegteFrage = null;
+	
+	/** The table model1. */
 	MyTableModel tableModel1;
+	
+	/** The table1. */
 	JTable table1;
+	
+	/** The button1. */
 	JButton button1;
+	
+	/** The button2. */
 	JButton button2;
+	
+	/** The button3. */
 	JButton button3;
+	
+	/** The panel knoepfe. */
 	JPanel panelKnoepfe;
+	
+	/** The frage aendern. */
 	String frageAendern = null;
 	
+	/**
+	 * Instantiates a new fb hinzufuegen gui.
+	 */
 	public FbHinzufuegenGUI()
 	{
 		try {
@@ -68,6 +101,9 @@ public class FbHinzufuegenGUI
 		holeBestehendeFragen();
 	}
 	
+	/**
+	 * Hauptfenster oeffnen.
+	 */
 	public void hauptfensterOeffnen()
 	{
 		//***********Hauptfenster wird erstellt******************
@@ -89,6 +125,9 @@ public class FbHinzufuegenGUI
 		//hauptfenster.setResizable(false);
 	}
 	
+	/**
+	 * Hauptfenster edit.
+	 */
 	public void hauptfensterEdit()
 	{
 		hauptpanel.setLayout(new BorderLayout());
@@ -106,6 +145,9 @@ public class FbHinzufuegenGUI
 		hauptpanel.add(panelCenter, BorderLayout.CENTER);
 	}
 	
+	/**
+	 * Panel center edit.
+	 */
 	public void panelCenterEdit()
 	{
 		panelCenter.setLayout(new BorderLayout());
@@ -257,6 +299,12 @@ public class FbHinzufuegenGUI
 		panelCenter.add(splitPaneCenter,BorderLayout.CENTER);
 	}
 	
+	/**
+	 * Frage hinzufuegen.
+	 * 
+	 * @param titel the titel
+	 * @param vorhanden the vorhanden
+	 */
 	public void frageHinzufuegen(String titel, boolean vorhanden)
 	{
 		String[] a = null;
@@ -377,6 +425,11 @@ public class FbHinzufuegenGUI
 		}
 	}
 	
+	/**
+	 * Meldung anzeigen.
+	 * 
+	 * @param meldung the meldung
+	 */
 	public void meldungAnzeigen(String meldung)
 	{
 		JOptionPane.showMessageDialog(hauptfenster, 
@@ -385,6 +438,14 @@ public class FbHinzufuegenGUI
 		JOptionPane.INFORMATION_MESSAGE);
 	}
 	
+	/**
+	 * Hinzufuegen in table.
+	 * 
+	 * @param frage the frage
+	 * @param antworten the antworten
+	 * 
+	 * @return true, if successful
+	 */
 	public boolean hinzufuegenInTable(String frage, ArrayList<String> antworten)
 	{
 		boolean vorhanden = false;
@@ -462,6 +523,9 @@ public class FbHinzufuegenGUI
 		return vorhanden;
 	}
 	
+	/**
+	 * Aendere status label.
+	 */
 	public void aendereStatusLabel()
 	{
 		if(tableModel1.alleFragen.size()>0)
@@ -476,12 +540,20 @@ public class FbHinzufuegenGUI
 		}
 	}
 	
+	/**
+	 * Aendere frage.
+	 * 
+	 * @param frage1 the frage1
+	 */
 	public void aendereFrage(Frage frage1)
 	{
 		frageHinzufuegen(frage1.getFragenTyp(),true);
 		frageAendern = frage1.getFrage();
 	}
 	
+	/**
+	 * Loesche frage.
+	 */
 	public void loescheFrage()
 	{
 		tableModel1.loescheFrage(table1.getSelectedRow());
@@ -489,6 +561,9 @@ public class FbHinzufuegenGUI
 	}
 	
 	
+	/**
+	 * Hole bestehende fragen.
+	 */
 	public void holeBestehendeFragen()
 	{
 		tableModel1.arrayListEinfuegen(FbHinzufuegen.gib_Klasse().fb1.getFragenList());

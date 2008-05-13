@@ -25,32 +25,86 @@ import javax.swing.border.LineBorder;
 import javax.swing.SwingUtilities;
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class FbRadioFrage.
+ */
 @SuppressWarnings("serial")
 public class FbRadioFrage extends javax.swing.JFrame {
+	
+	/** The j panel_mainpanel. */
 	private JPanel jPanel_mainpanel;
+	
+	/** The j label_ vorschau. */
 	private JLabel jLabel_Vorschau;
+	
+	/** The j scroll pane1. */
 	private JScrollPane jScrollPane1;
+	
+	/** The j text pane_ frageeingabe. */
 	private JTextPane jTextPane_Frageeingabe;
+	
+	/** The j text pane_ frage vorschau. */
 	public JTextPane jTextPane_FrageVorschau;
+	
+	/** The j button_ frageinkl antworten erstellen. */
 	private JButton jButton_FrageinklAntwortenErstellen;
+	
+	/** The j button_ radio button loeschen. */
 	private JButton jButton_RadioButtonLoeschen;
+	
+	/** The j panel1. */
 	public JPanel jPanel1;
+	
+	/** The j label_meldung. */
 	private JLabel jLabel_meldung;
+	
+	/** The j button_ antwort hinzufuegen. */
 	private JButton jButton_AntwortHinzufuegen;
+	
+	/** The j text field_ antwort hinzufuegen. */
 	private JTextField jTextField_AntwortHinzufuegen;
+	
+	/** The j button_ frage hinzufuegen. */
 	private JButton jButton_FrageHinzufuegen;
+	
+	/** The j panel_ fragenund antworten hinzufuegen. */
 	private JPanel jPanel_FragenundAntwortenHinzufuegen;
+	
+	/** The j label_ antwort hinzufuegen. */
 	private JLabel jLabel_AntwortHinzufuegen;
+	
+	/** The j scroll pane_ frage hinzufuegen. */
 	private JScrollPane jScrollPane_FrageHinzufuegen;
+	
+	/** The j label_ frage hinzufuegen. */
 	private JLabel jLabel_FrageHinzufuegen;
+	
+	/** The j label_ antwortenund fragen hinzufuegen. */
 	private JLabel jLabel_AntwortenundFragenHinzufuegen;
+	
+	/** The j button_ frage loeschen. */
 	private JButton jButton_FrageLoeschen;
+	
+	/** The j scroll pane_ fragevorschau. */
 	private JScrollPane jScrollPane_Fragevorschau;
+	
+	/** The j panel_vorschau. */
 	private JPanel jPanel_vorschau;
+	
+	/** The j text pane_ beschreibung_ beschreibung. */
 	private JTextPane jTextPane_Beschreibung_Beschreibung;
+	
+	/** The antworten. */
 	public ArrayList<String> antworten;
+	
+	/** The buttongroup. */
 	public ButtonGroup buttongroup;
+	
+	/** The buttons. */
 	public List<JRadioButton> buttons;
+	
+	/** The frage. */
 	public String frage;
 
 
@@ -65,8 +119,10 @@ public class FbRadioFrage extends javax.swing.JFrame {
 
 
 	/**
-	* Auto-generated main method to display this JFrame
-	*/
+	 * Auto-generated main method to display this JFrame.
+	 * 
+	 * @param args the args
+	 */
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
@@ -77,6 +133,9 @@ public class FbRadioFrage extends javax.swing.JFrame {
 		});
 	}
 	
+	/**
+	 * Instantiates a new fb radio frage.
+	 */
 	public FbRadioFrage() {
 		super();
 		initGUI();
@@ -86,6 +145,9 @@ public class FbRadioFrage extends javax.swing.JFrame {
 		buttons = new ArrayList< JRadioButton >();
 	}
 	
+	/**
+	 * Inits the gui.
+	 */
 	private void initGUI() {
 		WindowListener windowListener;
 		windowListener = new WindowAdapter(){

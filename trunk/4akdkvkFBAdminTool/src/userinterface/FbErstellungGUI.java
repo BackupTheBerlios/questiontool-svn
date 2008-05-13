@@ -29,11 +29,13 @@ import db.DbWriter;
 
 import fragen.*;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class FbErstellungGUI.
+ */
 public class FbErstellungGUI extends javax.swing.JFrame {
 
-	/**
-     * 
-     */
+	/** The Constant serialVersionUID. */
     private static final long serialVersionUID = 1L;
 
 	{
@@ -45,32 +47,77 @@ public class FbErstellungGUI extends javax.swing.JFrame {
 		}
 	}
 	
+	/** The j panel_mainwindow. */
 	private JPanel jPanel_mainwindow;
+	
+	/** The j label_titel_ fragebogen erstellung. */
 	private JLabel jLabel_titel_FragebogenErstellung;
+	
+	/** The j text area_fb beschreibung. */
 	private JTextArea jTextArea_fbBeschreibung;
+	
+	/** The j scroll pane_fb beschreibung. */
 	private JScrollPane jScrollPane_fbBeschreibung;
+	
+	/** The j label_fb end datum. */
 	private JLabel jLabel_fbEndDatum;
+	
+	/** The j button_ erstellen. */
 	private JButton jButton_Erstellen;
+	
+	/** The j separator4. */
 	private JSeparator jSeparator4;
+	
+	/** The j text field_ anzahl. */
 	private JTextField jTextField_Anzahl;
+	
+	/** The j label1. */
 	private JLabel jLabel1;
+	
+	/** The j text pane1. */
 	private JTextPane jTextPane1;
+	
+	/** The j label_logo. */
 	private JLabel jLabel_logo;
+	
+	/** The j separator3. */
 	private JSeparator jSeparator3;
+	
+	/** The j separator2. */
 	private JSeparator jSeparator2;
+	
+	/** The j separator1. */
 	private JSeparator jSeparator1;
+	
+	/** The j text pane_ beschreibung_ erstellen. */
 	private JTextPane jTextPane_Beschreibung_Erstellen;
+	
+	/** The j text pane_ beschreibung_ enddatum. */
 	private JTextPane jTextPane_Beschreibung_Enddatum;
+	
+	/** The j text pane_ beschreibung_ beschreibung. */
 	private JTextPane jTextPane_Beschreibung_Beschreibung;
+	
+	/** The j text pane_ titel_ beschreibung. */
 	private JTextPane jTextPane_Titel_Beschreibung;
+	
+	/** The j text field_fb end datum. */
 	private JTextField jTextField_fbEndDatum;
+	
+	/** The j label_fb beschreibung. */
 	private JLabel jLabel_fbBeschreibung;
+	
+	/** The j text field_fb titel. */
 	private JTextField jTextField_fbTitel;
+	
+	/** The j label_ fragebogen_ titel. */
 	private JLabel jLabel_Fragebogen_Titel;
 
 	/**
-	* Auto-generated main method to display this JFrame
-	*/
+	 * Auto-generated main method to display this JFrame.
+	 * 
+	 * @param args the args
+	 */
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
@@ -83,11 +130,17 @@ public class FbErstellungGUI extends javax.swing.JFrame {
 		});
 	}
 
+	/**
+	 * Instantiates a new fb erstellung gui.
+	 */
 	public FbErstellungGUI() {
 		super();
 		initGUI();
 	}
 	
+	/**
+	 * Inits the gui.
+	 */
 	private void initGUI() {
 		try {
 			setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
