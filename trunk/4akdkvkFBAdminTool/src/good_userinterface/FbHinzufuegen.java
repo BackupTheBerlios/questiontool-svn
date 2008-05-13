@@ -3,7 +3,7 @@ public class FbHinzufuegen
 {
 	private static FbHinzufuegenGUI gui1;
 	private static FbHinzufuegen FBfh = new FbHinzufuegen();
-	private static fragen.Fragebogen fb1 = fragen.Fragebogen.getInstance();
+	private static good_fragen.Fragebogen fb1 = good_fragen.Fragebogen.getInstance();
 	
 	public FbHinzufuegen()
 	{
@@ -42,7 +42,7 @@ public class FbHinzufuegen
 		return FBfh;
 	}
 
-	public static fragen.Fragebogen getFb1() {
+	public static good_fragen.Fragebogen getFb1() {
 		return fb1;
 	}
 
