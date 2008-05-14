@@ -141,27 +141,45 @@ public class Fragebogen
 		return anzahl;
 	}
 
-
+	/**
+	 * Setzt die Anzahl neu
+	 * @param anzahl
+	 */
 	public void setAnzahl(int anzahl)
 	{
 		this.anzahl = anzahl;
 	}
-
+	/**
+	 * Setzt die neuen Tans
+	 * @param tans
+	 */
 	public void setTans( ArrayList<String> tans )
     {
 	    this.tans = tans;
     }
 
+	/**
+	 * gibt eine ArrayList mit Tans zurück
+	 * @return
+	 */
 	public ArrayList<String> getTans()
     {
 	    return tans;
     }
 
+	/**
+	 * Setzt die Fragebogen ID
+	 * @param id
+	 */
 	public void setId( int id )
     {
 	    this.id = id;
     }
 
+	/**
+	 * Gibt die Fragebogen ID zurück
+	 * @return
+	 */
 	public int getId()
     {
 	    return id;
