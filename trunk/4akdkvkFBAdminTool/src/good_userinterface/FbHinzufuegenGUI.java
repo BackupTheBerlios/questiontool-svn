@@ -31,6 +31,10 @@ import good_fragen.*;
  */
 public class FbHinzufuegenGUI 
 {
+	
+	/**
+	 * test-test
+	 */
 	JFrame hauptfenster; //JFrame was ich verwende
 	JPanel hauptpanel;   //JPanel welches in der ContentPane drinnen ist
 	JPanel panelCenter;
