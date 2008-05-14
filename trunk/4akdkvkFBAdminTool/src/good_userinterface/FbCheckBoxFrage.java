@@ -160,8 +160,7 @@ public class FbCheckBoxFrage extends javax.swing.JFrame {
 							  			                              "Es ist keine Frage vorhanden zum Löschen",
 							  			                              "Error",
 							  			                              JOptionPane.ERROR_MESSAGE) ; 
-						    	  }
-						    	  
+						    	  }					    	  
 						      }
 						});
 					}
@@ -184,10 +183,8 @@ public class FbCheckBoxFrage extends javax.swing.JFrame {
 						jButton_CheckBoxButtonLoeschen.addActionListener(new ActionListener(){
 						      public void actionPerformed(ActionEvent arg0) {
 						    	  if(antworten.size()>0){
-						    		 //System.out.println(buttongroup.getButtonCount());
-						    		 
-						    		  try{
-						    			  
+						    		 //System.out.println(buttongroup.getButtonCount());						    		 
+						    		  try{						    			  
 						    			  ButtonModel buttonmodel = buttongroup.getSelection();
 							    		  String auswahl = buttonmodel.getActionCommand();
 							    		  antworten.remove( Integer.parseInt( auswahl ) );
@@ -195,8 +192,7 @@ public class FbCheckBoxFrage extends javax.swing.JFrame {
 						    			  if(!checkboxes.isEmpty()){
 							    			  for(int i=0; i<checkboxes.size();i++)
 							    				  checkboxes.remove( i );
-							    		  }
-							    		 
+							    		  }						    		 
 						    			  jPanel1 = new JPanel();
 											jScrollPane1.setViewportView(jPanel1);
 											jPanel1.setPreferredSize(new java.awt.Dimension(237, 300));
@@ -212,26 +208,22 @@ public class FbCheckBoxFrage extends javax.swing.JFrame {
 							    			  b.setBounds( 11, y, 93, 23 );
 							    			  y+=25;
 							    			  checkboxes.add( b );
-							    			  buttongroup.add( b );
-							    			  
+							    			  buttongroup.add( b );							    			  
 							    			  i++;
 							    		  }
 						    		  }
 						    		  catch(NullPointerException exc){
 						    			  //dsdf
-						    		  }
-						    	  
+						    		  }						    	  
 						    	  }
 						    	  else{
 						    		  JOptionPane.showMessageDialog(jPanel_mainpanel,
 							  			                              "Sie haben keine Frage ausgewählt",
 							  			                              "Error",
 							  			                              JOptionPane.ERROR_MESSAGE) ; 
-						    	  }
-						    	  
+						    	  }						    	  
 						      }
-						});
-						
+						});						
 					}
 					{
 						jButton_FrageinklAntwortenErstellen = new JButton();
@@ -261,9 +253,6 @@ public class FbCheckBoxFrage extends javax.swing.JFrame {
 						    	  }
 						      }
 						});
-					}
-					{
-						
 					}
 				}
 				{
@@ -380,8 +369,7 @@ public class FbCheckBoxFrage extends javax.swing.JFrame {
 							  			                              "Sie haben keine Antwort eingegeben",
 							  			                              "Error",
 							  			                              JOptionPane.ERROR_MESSAGE) ; 
-						    	  }
-						    	  
+						    	  }						    	 
 						      }
 						});
 					}
@@ -416,12 +404,9 @@ public class FbCheckBoxFrage extends javax.swing.JFrame {
 			  b.setActionCommand(""+i);
 			  b.setBounds( 11, y, 93, 23 );
 			  y+=25;
-			  checkboxes.add( b );
-			  
-			  buttongroup.add( b );
-			  
+			  checkboxes.add( b );			  
+			  buttongroup.add( b );			  
 			  i++;
 		  }
 	}
-
 }
