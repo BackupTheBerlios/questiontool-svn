@@ -10,9 +10,18 @@ import fragen.FrageRadio;
 import fragen.FrageText;
 import fragen.Fragebogen;
 import db.DbWriter;
-
+/**
+ * Diese Klasse bildet die Schnittstelle zwischen der Datenbank und der Anwendung. Wenn Fragebogenerstellung beendet wird, kommt diese
+ * Klasse zum Einsatz.
+ * 
+ * @author Edenhofer
+ *
+ */
 public class SchnittstelleFBzuDB
 {
+	/**
+	 * Diese Methode benutze alle Methoden der Klasse DbWriter um den Fragenbogen(Singleton) in die Db zu speichern.
+	 */
 	public static void speicherFb()
 	{
 		Fragebogen fb = Fragebogen.getInstance();
@@ -40,44 +49,4 @@ public class SchnittstelleFBzuDB
 
 	}
 	
-	public static void main(String[] args)
-	{
-		Fragebogen fb = Fragebogen.getInstance();
-		fb.setBeschreibung("Test");
-		fb.setTitel("Test");
-		fb.setEnddatum(new Date(434324234));
-		FrageCheckBox fc = new FrageCheckBox("Sein oder nicht sein?");
-		fc.addAntwort("test1");
-		fc.addAntwort("test2");
-		fc.addAntwort("test3");
-		
-		FrageText ft = new FrageText("Ist der Glaube das Ende allen Wissens?");
-		ft.addAntwort("Test1");
-		ft.addAntwort("Test2");
-		ft.addAntwort("Test3");
-		
-		FrageRadio fr = new FrageRadio("Wer war Karl Marx?");
-		fr.addAntwort("Test122");
-		fr.addAntwort("Test12");
-		fr.addAntwort("Test2");
-		
-		fb.addFrage(fc);
-		fb.addFrage(ft);
-		fb.addFrage(fr);
-		
-		ArrayList<String> tans = new ArrayList();
-		tans.add("0000002");
-		tans.add("0000001");
-		tans.add("0000003");
-		tans.add("0000004");
-		tans.add("0000005");
-		
-		fb.setTans(tans);
-        speicherFb();
-		
-		
-		
-		
-		
-	}
 }
