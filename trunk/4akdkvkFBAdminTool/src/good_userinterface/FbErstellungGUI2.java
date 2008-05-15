@@ -21,12 +21,11 @@ import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.WindowConstants;
 import javax.swing.border.LineBorder;
-import javax.swing.SwingUtilities;
 
 import good_fragen.*;
 
 @SuppressWarnings("serial")
-public class FbErstellungGUI extends javax.swing.JFrame {
+public class FbErstellungGUI2 extends javax.swing.JFrame {
 
 	{
 		//Set Look & Feel
@@ -90,7 +89,6 @@ public class FbErstellungGUI extends javax.swing.JFrame {
 	
 	/** The j text pane_ titel_ beschreibung. */
 	private JTextPane jTextPane_Titel_Beschreibung;
-
 	
 	/** The j text field_fb end datum. */
 	private JTextField jTextField_fbEndDatum;
@@ -104,27 +102,15 @@ public class FbErstellungGUI extends javax.swing.JFrame {
 	/** The j label_ fragebogen_ titel. */
 	private JLabel jLabel_Fragebogen_Titel;
 
-
-	/**
-	* Auto-generated main method to display this JFrame
-	*/
-	public static void main(String[] args) {
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				FbErstellungGUI inst = new FbErstellungGUI();
-				inst.setLocationRelativeTo(null);
-				inst.setVisible(true);
-				inst.setTitle("Fragebogen-Erstellung");
-				inst.setResizable(false);
-			}
-		});
-	}
-
 	/**
 	 * 
 	 */
-	public FbErstellungGUI() {
+	public FbErstellungGUI2() {
 		super();
+		setLocationRelativeTo(null);
+		setVisible(true);
+		setTitle("Fragebogen-Erstellung");
+		setResizable(false);
 		initGUI();
 	}
 	
@@ -287,6 +273,7 @@ public class FbErstellungGUI extends javax.swing.JFrame {
 				  			                              "Error",
 				  			                              JOptionPane.ERROR_MESSAGE) ;
 											}
+											
 											catch(NumberFormatException e) {
 												JOptionPane.showMessageDialog(jPanel_mainwindow,
 				  			                              "Bitte nur Zahlen im Format dd.mm.yyyy beim Endatum eingeben.",
