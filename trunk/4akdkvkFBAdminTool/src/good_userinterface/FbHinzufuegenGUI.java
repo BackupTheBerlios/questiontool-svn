@@ -32,13 +32,15 @@ import db.TAN;
 import good_fragen.*;
 
 /**
+ * Die Klasse FbHinzufuegenGUI.
+ * In dieser Klasse wird die GUI für die Frageneingabe bzw. Fragenänderung aufgebaut.
  * 
- * @author 
- *
  */
 public class FbHinzufuegenGUI 
 {
-	
+	/**
+	 * Datenfelder der Klasse FbHinzufuegenGUI.
+	 */
 	private static FbHinzufuegenGUI instance = null;
 	private static JFrame hauptfenster; //JFrame was ich verwende
 	private static JPanel hauptpanel;   //JPanel welches in der ContentPane drinnen ist
@@ -55,17 +57,23 @@ public class FbHinzufuegenGUI
 	private static String frageAendern = null;
 	
 	/**
-	 * 
+	 * Konstruktor der Klasse FbHinzufuegenGUI()
 	 */
 	public FbHinzufuegenGUI()
 	{
 		//Windows Look an Feel erstellen
+		/**
+		 * Hier wird eingestellt, dass man die klassiche Ansicht verwendet. 
+		 */
 		try {
 			javax.swing.UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsClassicLookAndFeel");
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
 		
+		/**
+		 * Hier werden einige Datenfelder initialisiert und die Methoden hauptfensterOeffnen() und holeBestehendeFragen() aufgerufen.
+		 */
 		tableModel1 = new MyTableModel();
 		table1 = new JTable(tableModel1);
 		button1 = new JButton("Hinzufügen");
@@ -77,18 +85,30 @@ public class FbHinzufuegenGUI
 	}
 	
 	/**
+	 * Die Methode hauptfensterOeffnen() wird im Konstruktor aufgerufen.
+	 * In dieser Methode wird eigentlich das Hauptfenster aufgerufen, wo auf der 
+	 * linken Seite eine Tabelle mit Fragen zu sehen ist und auf der rechten Seite  
+	 * Auswahlmöglichkeiten in Form von RadioButtons.
+	 * Weiters wird hier ein Button zum speichern der Fragen in das Fragebogenobjekt erstellt.
 	 * 
 	 */
 	public void hauptfensterOeffnen()
 	{
-		//***********Hauptfenster wird erstellt******************
+		/**
+		 * Hier wird das JFrame hauptfenster erstellt.
+		 * Wenn man das Fenster schließt, wird das ganze JFrame geschlossen
+		 * Der Container wird initialisiert und ein JPanel "hauptpanel" erstellt.
+		 * In dieses "hauptpanel" kommen alle weiteren Panels.
+		 */
 		hauptfenster = new JFrame("Fragen Hinzufuegen");
 		hauptfenster.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Container contentPane = hauptfenster.getContentPane();
 		hauptfenster.setResizable(false);
 		hauptpanel = new JPanel();
 		
-		//**********Hauptpanel Border, Optik....etc. Einstellungen für hauptpanel
+		/**
+		* Hauptpanel Border, Optik....etc. Einstellungen für hauptpanel
+		*/
 		hauptfensterEdit(); // hauptfensterEdit() wird hier aufgerufen		
 		contentPane.add(hauptpanel);
 		//**********Erstellte Komponente zu Frame hinzufügen*******
@@ -100,7 +120,10 @@ public class FbHinzufuegenGUI
 	}
 	
 	/**
-	 * 
+	 * In der Methode hauptfensterEdit() werden Einstellungen für das hauptfenster durchgeführt.
+	 * -) Layout; Hier wird das BorderLayout für das "hauptpanel" eingestellt.
+	 * -) Erstellung weiterer Panels die ich in der Methode panelCenterEdit() verwende
+	 * -) 
 	 */
 	public void hauptfensterEdit()
 	{
@@ -118,7 +141,13 @@ public class FbHinzufuegenGUI
 	}
 	
 	/**
-	 * 
+	 * In der Methode panelCenterEdit() werden die Panels "panelNorth" und "panelCenter" weiter editiert.
+	 * Hier werden alle Label wie Titel, Beschreibung, Enddatum, Gültig für, etc... definiert.
+	 * Weiters wird eine JSplitPane in das "panelCenter" eingefügt.
+	 * Im linken JPanel wird ein JTable eingefügt und darunter ein Label, welches Informationen über die Anzahl der 
+	 * hinzugefügten Fragen liefert. Falls Fragen hinzugeführt wurden, werden weiters 2 Buttons erstellt(Details- und Löschen-Button)
+	 * Im rechten Pane wird eine Auswahlmögchlikeit in Form von Radiobuttons, ein Hinzufügen-Button um Fragen hinzufügen zu könne und ein 
+	 * Button zum Abspeichern aller Fragen in das Fragebogen Objekt, erstellt.
 	 */
 	public void panelCenterEdit()
 	{
@@ -288,9 +317,12 @@ public class FbHinzufuegenGUI
 	}
 	
 	/**
-	 * 
-	 * @param titel
-	 * @param vorhanden
+	 * Die Methode frageHinzufuegen() wird verwendet, um jenachdem welche Frage man hinzufügen will,
+	 * das richtige Fenster geöffnet wird. Diese Methode enthält zwei Parameter: titel und vorhanden.
+	 * Der String "titel" Parameter wird verwendet, um herausfinden zu können, welchen Art von Frage man hinzufügen möchte.
+	 * Der boolean "vorhanden" Parameter gibt an, ob die Frage schon vorhanden ist. Wenn ja dann wird aus dem TableModel die 
+	 * richtige Frage herausgesucht und es öffnet sich das Fragenfenster mit den vorhanden Fragen. Ansonsten wird ein leeres 
+	 * Fenster angezeigt, wo man erst Fragen hinzufügen muss.
 	 */
 	public void frageHinzufuegen(String titel, boolean vorhanden)
 	{
@@ -389,8 +421,8 @@ public class FbHinzufuegenGUI
 	}		
 
 	/**
-	 * 
-	 * @param meldung
+	 * Diese Methode wird verwendet, um PopUp-Meldung anzuzeigen.
+	 * Als Parameter ist ein String definiert, welches die Nachricht beinhaltet.
 	 */
 	public static void meldungAnzeigen(String meldung)
 	{
@@ -401,10 +433,13 @@ public class FbHinzufuegenGUI
 	}
 	
 	/**
+	 * Wird im Fragenfenster "Frage inkl. Antworten erstellen" gecklickt, wird diese Methode
+	 * hinzufuegenInTable aufgerufen. Der erste Parameter ist ein String, welches die Frage beinhaltet.
+	 * Der zweite Parameter ist eine ArrayList mit Stringobjekten, welches die Antworten beinhaltet.
+	 * Ist eine Frage mit der gleichen Fragestellung vorhanden, so wird die Methode "meldungAnzeigen()" aufgerufen
+	 * und ein PopUp mit der Meldung, dass die Frage schon vorhanden ist, angezeigt.
+	 * Ist die Frage noch nicht vorhanden, wird die Frage in die Tabelle eingetragen.
 	 * 
-	 * @param frage
-	 * @param antworten
-	 * @return
 	 */
 	public static boolean hinzufuegenInTable(String frage, ArrayList<String> antworten)
 	{
@@ -463,8 +498,10 @@ public class FbHinzufuegenGUI
 		return vorhanden;
 	} // methode zu
 	
+	
 	/**
-	 * 
+	 * Die Methode aendereStatusLabel() wird verwendet, um den Text des Labell labelFragenEingefuegt
+	 * zu ändern. Jenachdem ob Fragen enthalten sind, wird angezeigt ob und wie viele Fragen eingefügt wurden.
 	 */
 	public static void aendereStatusLabel()
 	{
@@ -479,8 +516,7 @@ public class FbHinzufuegenGUI
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Mit der Methode getInstance() hole ich mir die FbHinzufuegen Instanz.
 	 */
 	public static FbHinzufuegenGUI getInstance()
 	{
@@ -493,8 +529,8 @@ public class FbHinzufuegenGUI
 	}
 	
 	/**
-	 * 
-	 * @param frage1
+	 * Mit der Methode aendereFrage() ruft die Methode frageHinzufuegen() auf, und übergibt als zweiten Parameter
+	 * ein boolean Wert, und zwar false. Damit wird signalisiert, dass die Details einer Frage angezeigt werden sollen.
 	 */
 	public void aendereFrage(Frage frage1)
 	{
@@ -503,7 +539,8 @@ public class FbHinzufuegenGUI
 	}
 	
 	/**
-	 * 
+	 * Mit der Methode loescheFrage() wird die selektierte Frage gelöscht. Dabei wird die Methode 
+	 * loescheFrage() in der Klasse TableModel aufgerufen.
 	 */
 	public void loescheFrage()
 	{
@@ -512,7 +549,10 @@ public class FbHinzufuegenGUI
 	}
 	
 	/**
-	 * 
+	 * Mit der Methode holeBestehendeFrage() werden die bestehende Fragen aus dem Fragebogenobjekt
+	 * geholt. Diese Methode wird beim Aufrufen des hauptfensters aufgerufen. z.B wenn man bestehende, schon 
+	 * im Fragebogen abgespeicherte Fragen, ändern möchte, dann werden diese Fragen beim Aufrufen des Fensters
+	 * in die Tabelle geladen.
 	 */
 	public void holeBestehendeFragen()
 	{
@@ -522,8 +562,7 @@ public class FbHinzufuegenGUI
 	}
 
 	/**
-	 * 
-	 * @return
+	 * Mit der Methode getButton1() wird der button1 zurückgegeben.
 	 */
 	public JButton getButton1() {
 		return button1;
