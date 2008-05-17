@@ -43,7 +43,7 @@ if (!isset ($_GET['TAN'])) {
 	if (!(is_numeric($_GET['TAN']))) {
 		echo die("ungültige TAN eingegeben");
 	}
-	$sql = "SELECT * from tan where T_ID = " . $_GET['TAN'];
+	$sql = "SELECT * from tan where T_ID = '" . $_GET['TAN']. "'";
 	$result = mssql_query($sql) OR die("Es gab Probleme beim SQL-Befehl");
 	if (mssql_num_rows($result) == 0) {
 		//es wurde eine ungültige ID eingegeben und das Skript wird beendet
